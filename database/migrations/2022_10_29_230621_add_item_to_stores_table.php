@@ -14,8 +14,8 @@ class AddItemToStoresTable extends Migration
     public function up()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->text('related_stores')->nullable();
-            $table->text('near_places')->nullable();
+            // $table->text('related_stores')->nullable();
+            // $table->text('near_places')->nullable();
         });
     }
 

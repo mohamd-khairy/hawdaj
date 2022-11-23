@@ -878,8 +878,49 @@
                 </div>
             </div>
         </div>
-    </section><!-- tourist facilities -->
-
+    </section>
+    <!-- tourist facilities -->
+    </div>
+    <!-- make a trip popup -->
+    <div class="popup_that_shows_on_startup" dir = "{{(app()-> getLocale() === 'en') ? 'ltr' : 'rtl'}}">
+        <div id="make_a_trip_popup" class="container hide">
+            <h5>{{__('dashboard.ready_to_make_a_trip')}}</h5>
+            <div class="tabs row">
+                <div class="main_tab col-12">
+                    <p class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo qui incidunt, quam id architecto, repellat vel fuga placeat distinctio quia magni praesentium reiciendis aspernatur eveniet iure? Omnis dicta eligendi tempore.
+                    </p>
+                    <button class="make_a_trip_button" onclick="makeATripNextTab(1)">{{__('dashboard.make_a_trip')}}</button>
+                </div>
+                <div class="tab hide col-12">
+                    <!-- <input type="text" placeholder="Name">
+                    <input type="email" placeholder="Email"> -->
+                    <input type="date" placeholder="date" id="date">
+                    <select name="region_id" id="region_id">
+                        <option value="الرياض">الرياض</option>
+                    </select>
+                    <select name="city_id" id="city_id">
+                        <option value="الرياض">الرياض</option>
+                    </select>
+                    <button class="make_a_trip_button" onclick="makeATripNextTab(2)">{{__('next')}}</button>
+                </div>
+                <div class="tab hide col-12">
+                    <!-- <input type="text" placeholder="Name">
+                    <input type="email" placeholder="Email"> -->
+                    <select name="season" id="season">
+                        <option value="موسم الربيع">موسم الربيع</option>
+                    </select>
+                    <input type="number" placeholder="days" id="days">
+                    <input type="number" placeholder="funny days" id="funny_days">
+                    <select name="city_id" id="city_id">
+                        <option value="مجاني">مجاني</option>
+                    </select>
+                    <button class="make_a_trip_button" onclick="makeATripNextTab(3)">{{__('next')}}</button>
+                </div>
+            </div>
+        </div>
+        <!-- background for the popup (useful in js) -->
+        <div id="popup_background"></div>
     </div>
 </main>
 
@@ -887,6 +928,7 @@
 @endsection
 
 @section('scripts')
+<script src="{{asset('dashboard_assets/js/dmukaZoom/make_a_trip_popup.js')}}"></script>
 <script>
     function myFunction(text) {
         if (text == '' || text === '' || text == null) {

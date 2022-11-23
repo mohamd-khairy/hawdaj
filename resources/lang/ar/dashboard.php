@@ -1029,4 +1029,8 @@ return [
     'summer_season' => 'الصيف',
     'fall_season' => 'الخريف',
     'winter_season' => 'الشتاء',
+
+    /* make a trip popup */
+    'ready_to_make_a_trip' => 'مستعد لحجز رحلة رائعة؟!',
+    'make_a_trip' => 'احجز رحلتي',
 ];
