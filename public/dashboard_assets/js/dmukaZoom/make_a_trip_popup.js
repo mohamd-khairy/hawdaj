@@ -13,3 +13,6 @@ function makeATripNextTab(tabNum){
     $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transition", "all 0.5s")
     $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transform", `translateX(${val}%)`)
 }
+$('#make_a_trip_popup .tab .trip_categories > span').click(function(){
+    $(this).toggleClass('active')
+})

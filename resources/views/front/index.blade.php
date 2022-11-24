@@ -895,6 +895,7 @@
                 <div class="tab hide col-12">
                     <!-- <input type="text" placeholder="Name">
                     <input type="email" placeholder="Email"> -->
+                    <h6>Select Date and Place</h6>
                     <input type="date" placeholder="date" id="date">
                     <select name="region_id" id="region_id">
                         <option value="الرياض">الرياض</option>
@@ -902,11 +903,15 @@
                     <select name="city_id" id="city_id">
                         <option value="الرياض">الرياض</option>
                     </select>
-                    <button class="make_a_trip_button" onclick="makeATripNextTab(2)">{{__('next')}}</button>
+                    <div class="navigation_buttons">
+                        <button class="make_a_trip_button" onclick="makeATripNextTab(0)">{{__('dashboard.back')}}</button>
+                        <button class="make_a_trip_button" onclick="makeATripNextTab(2)">{{__('dashboard.next')}}</button>
+                    </div>
                 </div>
                 <div class="tab hide col-12">
                     <!-- <input type="text" placeholder="Name">
                     <input type="email" placeholder="Email"> -->
+                    <h6>Specify Your Desired Trip</h6>
                     <select name="season" id="season">
                         <option value="موسم الربيع">موسم الربيع</option>
                     </select>
@@ -915,7 +920,34 @@
                     <select name="city_id" id="city_id">
                         <option value="مجاني">مجاني</option>
                     </select>
-                    <button class="make_a_trip_button" onclick="makeATripNextTab(3)">{{__('next')}}</button>
+                    <div class="navigation_buttons">
+                        <button class="make_a_trip_button" onclick="makeATripNextTab(1)">{{__('dashboard.back')}}</button>
+                        <button class="make_a_trip_button" onclick="makeATripNextTab(3)">{{__('dashboard.next')}}</button>
+                    </div>
+                </div>
+                <div class="tab hide col-12">
+                    <!-- <input type="text" placeholder="Name">
+                    <input type="email" placeholder="Email"> -->
+                    <h6>Select as Many as You Like</h6>
+                    <div class="trip_categories">
+                        <span>musuems</span>
+                        <span>musuems</span>
+                        <span>musuems</span>
+                        <span>musuems</span>
+                        <span>musuems</span>
+                    </div>
+                    <div class="navigation_buttons">
+                        <button class="make_a_trip_button" onclick="makeATripNextTab(2)">{{__('dashboard.back')}}</button>
+                        <button class="make_a_trip_button" onclick="makeATripNextTab(4)">{{__('dashboard.next')}}</button>
+                    </div>
+                </div>
+                <div class="tab hide col-12">
+                    <h6>Log In</h6>
+                    <input type="text" placeholder="Name">
+                    <input type="email" placeholder="Email">
+                    <a href="#">register</a>
+                    <a href="#">forgot password</a>
+                    <button class="make_a_trip_button" onclick="makeATripNextTab(4)">{{__('dashboard.login')}}</button>
                 </div>
             </div>
         </div>

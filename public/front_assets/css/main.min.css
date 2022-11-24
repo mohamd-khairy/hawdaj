@@ -4058,10 +4058,20 @@ select.form-control {
     margin: 5px 0 0;
     width: max-content;
     align-self: center;
+    color: #2c085d;
+    border-color: #2c085d;
 }
 
-.popup_that_shows_on_startup #make_a_trip_popup .tab > button.make_a_trip_button{
+.popup_that_shows_on_startup #make_a_trip_popup .main_tab > button.make_a_trip_button:hover{
+    background-color: #2c085d;
+    color: #fff;
+}
+
+.popup_that_shows_on_startup #make_a_trip_popup .tab button.make_a_trip_button{
     border: solid 2px #000;
+    font-weight: bold;
+    width: 100px;
+    border-radius: 50px;
     font-weight: bold;
 }
 
@@ -4087,13 +4097,51 @@ select.form-control {
     width: 100%;
 }
 
-.popup_that_shows_on_startup .tab > *{
+.popup_that_shows_on_startup .tab > *:not(h6):not(.trip_categories):not(a):not(.navigation_buttons), #make_a_trip_popup .tab .trip_categories > span{
     width: 70%;
     margin: 5px auto;
     height: 40px;
     border-radius: 10px;
     padding: 5px 10px;
     border: 1px solid #bdbdbb;
+    cursor: pointer;
+}
+
+.popup_that_shows_on_startup .tab > .navigation_buttons{
+    width: 70%;
+    margin: 5px auto;
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#make_a_trip_popup .tab .trip_categories{
+    padding: 0 10px;
+}
+
+#make_a_trip_popup .tab .trip_categories > span{
+    width: fit-content;
+    display: inline-block;
+    margin: 10px;
+}
+
+#make_a_trip_popup .tab .trip_categories > span.active{
+    border-color: #2c085d;
+    background-color: #2c085d;
+    color: #fff;
+    transition: all 0.2s;
+}
+
+.popup_that_shows_on_startup .tab > input{
+    cursor: auto !important;
+}
+
+@media only screen and (max-width: 830px){
+    .popup_that_shows_on_startup #make_a_trip_popup{
+        width: 90%;
+        margin-top: 150px;
+        margin-left: 5%;
+    }
 }
 
 /* make a trip popup end */
