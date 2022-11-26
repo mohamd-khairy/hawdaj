@@ -4107,6 +4107,17 @@ select.form-control {
     cursor: pointer;
 }
 
+.popup_that_shows_on_startup .tab > select#categories, .popup_that_shows_on_startup .tab > select#key_words{
+    max-height: 75px;
+}
+
+.popup_that_shows_on_startup .tab > button#login, .popup_that_shows_on_startup .tab > button#register{
+    border: solid 2px #000;
+    font-weight: bold;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
 .popup_that_shows_on_startup .tab > .navigation_buttons{
     width: 70%;
     margin: 5px auto;

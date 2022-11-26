@@ -1,4 +1,4 @@
-<div class="popup_that_shows_on_startup" dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}">
+<div class="popup_that_shows_on_startup" dir="ltr">
 
     <div id="make_a_trip_popup" class="container hide" style="z-index: 999999;">
         <h5>{{__('dashboard.ready_to_make_a_trip')}}</h5>
@@ -6,14 +6,14 @@
             <input type="hidden" name="type" id="type" value="guest">
             @csrf
             <div class="tabs row">
-                <div class="main_tab col-12">
+                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="main_tab col-12">
                     <p class="description">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo qui incidunt, quam id architecto, repellat vel fuga placeat distinctio quia magni praesentium reiciendis aspernatur eveniet iure? Omnis dicta eligendi tempore.
                     </p>
                     <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(1)">{{__('dashboard.make_a_trip')}}</button>
                 </div>
 
-                <div class="tab hide col-12">
+                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
                     <h6>Select Date and Place</h6>
                     <input type="date" name="date" placeholder="date" id="date" required>
                     <select name="region_id" id="region_id">
@@ -30,7 +30,7 @@
                         <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(2)">{{__('dashboard.next')}}</button>
                     </div>
                 </div>
-                <div class="tab hide col-12">
+                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
                     <h6>Specify Your Desired Trip</h6>
                     <select name="season" id="season">
                         @foreach($seasons as $item)
@@ -50,7 +50,7 @@
                         <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(3)">{{__('dashboard.next')}}</button>
                     </div>
                 </div>
-                <div class="tab hide col-12">
+                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
 
                     <h6>Select as Many as You Like</h6>
 
@@ -73,15 +73,15 @@
                         <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(4)">{{__('dashboard.next')}}</button>
                     </div>
                 </div>
-                <div class="tab hide col-12">
+                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
                     @if(!auth()->check())
 
-                    <button type="submit" class="">{{__('dashboard.continueAsAguest')}}</button>
-
+                    
                     <h6>Log In</h6>
                     <input type="email" name="email" placeholder="Email">
                     <input type="password" name="password" placeholder="Password">
                     <button type="button" id="login">{{__('dashboard.login')}}</button>
+                    <button type="submit" class="">{{__('dashboard.continueAsAguest')}}</button>
 
                     <a href="#" onclick="makeATripNextTab(5)">{{__('dashboard.register')}}</a>
                     @else
