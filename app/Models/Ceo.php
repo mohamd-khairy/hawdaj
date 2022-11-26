@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Ceo extends Model
+{
+    use HasFactory;
+
+    protected $casts = [
+        'key_words' => 'array'
+    ];
+    protected $guarded;
+
+}
