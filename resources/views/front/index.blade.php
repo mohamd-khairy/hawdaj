@@ -881,79 +881,13 @@
     </section>
     <!-- tourist facilities -->
     </div>
+
+    @if (!auth()->check() || !\Illuminate\Support\Facades\Session::get(auth()->user()->email)) {
+
     <!-- make a trip popup -->
-    <div class="popup_that_shows_on_startup" dir = "{{(app()-> getLocale() === 'en') ? 'ltr' : 'rtl'}}">
-        <div id="make_a_trip_popup" class="container hide">
-            <h5>{{__('dashboard.ready_to_make_a_trip')}}</h5>
-            <div class="tabs row">
-                <div class="main_tab col-12">
-                    <p class="description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo qui incidunt, quam id architecto, repellat vel fuga placeat distinctio quia magni praesentium reiciendis aspernatur eveniet iure? Omnis dicta eligendi tempore.
-                    </p>
-                    <button class="make_a_trip_button" onclick="makeATripNextTab(1)">{{__('dashboard.make_a_trip')}}</button>
-                </div>
-                <div class="tab hide col-12">
-                    <!-- <input type="text" placeholder="Name">
-                    <input type="email" placeholder="Email"> -->
-                    <h6>Select Date and Place</h6>
-                    <input type="date" placeholder="date" id="date">
-                    <select name="region_id" id="region_id">
-                        <option value="الرياض">الرياض</option>
-                    </select>
-                    <select name="city_id" id="city_id">
-                        <option value="الرياض">الرياض</option>
-                    </select>
-                    <div class="navigation_buttons">
-                        <button class="make_a_trip_button" onclick="makeATripNextTab(0)">{{__('dashboard.back')}}</button>
-                        <button class="make_a_trip_button" onclick="makeATripNextTab(2)">{{__('dashboard.next')}}</button>
-                    </div>
-                </div>
-                <div class="tab hide col-12">
-                    <!-- <input type="text" placeholder="Name">
-                    <input type="email" placeholder="Email"> -->
-                    <h6>Specify Your Desired Trip</h6>
-                    <select name="season" id="season">
-                        <option value="موسم الربيع">موسم الربيع</option>
-                    </select>
-                    <input type="number" placeholder="days" id="days">
-                    <input type="number" placeholder="funny days" id="funny_days">
-                    <select name="city_id" id="city_id">
-                        <option value="مجاني">مجاني</option>
-                    </select>
-                    <div class="navigation_buttons">
-                        <button class="make_a_trip_button" onclick="makeATripNextTab(1)">{{__('dashboard.back')}}</button>
-                        <button class="make_a_trip_button" onclick="makeATripNextTab(3)">{{__('dashboard.next')}}</button>
-                    </div>
-                </div>
-                <div class="tab hide col-12">
-                    <!-- <input type="text" placeholder="Name">
-                    <input type="email" placeholder="Email"> -->
-                    <h6>Select as Many as You Like</h6>
-                    <div class="trip_categories">
-                        <span>musuems</span>
-                        <span>musuems</span>
-                        <span>musuems</span>
-                        <span>musuems</span>
-                        <span>musuems</span>
-                    </div>
-                    <div class="navigation_buttons">
-                        <button class="make_a_trip_button" onclick="makeATripNextTab(2)">{{__('dashboard.back')}}</button>
-                        <button class="make_a_trip_button" onclick="makeATripNextTab(4)">{{__('dashboard.next')}}</button>
-                    </div>
-                </div>
-                <div class="tab hide col-12">
-                    <h6>Log In</h6>
-                    <input type="text" placeholder="Name">
-                    <input type="email" placeholder="Email">
-                    <a href="#">register</a>
-                    <a href="#">forgot password</a>
-                    <button class="make_a_trip_button" onclick="makeATripNextTab(4)">{{__('dashboard.login')}}</button>
-                </div>
-            </div>
-        </div>
-        <!-- background for the popup (useful in js) -->
-        <div id="popup_background"></div>
-    </div>
+    @include('front.trip.make_trip')
+
+    @endif
 </main>
 
 
@@ -1060,5 +994,33 @@
             });
         }
     }
+</script>
+<script>
+    $(document).on('change', '#region_id', function() {
+        // get cities
+        const region_id = $(this).val()
+
+        $.ajax({
+            type: "GET",
+            url: "{{ route('cities') }}",
+            data: {
+                region_id: region_id
+            },
+            success: function(data) {
+                $('#city_id').empty();
+                $('#city_id').append(data);
+            }
+        });
+    })
+
+
+    $(document).on('click', '#login', function() {
+        $('#type').val('login');
+        $('#trip_form').submit();
+    });
+    $(document).on('click', '#register', function() {
+        $('#type').val('register');
+        $('#trip_form').submit();
+    });
 </script>
 @endsection

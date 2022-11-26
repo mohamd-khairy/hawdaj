@@ -1036,4 +1036,6 @@ return [
     /* make a trip popup */
     'ready_to_make_a_trip' => 'مستعد لحجز رحلة رائعة؟!',
     'make_a_trip' => 'احجز رحلتي',
+    'continueAsAguest' => 'تسجيل ك ضيف',
+
 ];

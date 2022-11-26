@@ -121,17 +121,19 @@ class PlacesController extends Controller
             $data['active'] = isset($request->active) ? 1 : 0;
 
             if ($request->address_type == 'map') {
-                // unset($request['address']);
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             } elseif ($request->address_type == 'link') {
-                unset($request['lat'], $request['long']);
                 $data['address'] = request('link');
+                $data['lat'] = null;
+                $data['long'] = null;
             } else {
-                // unset($request['address']);
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             }
 
-            if (request('address')) {
-                $request['address'] = request('address');
-            }
 
             if (request()->hasFile('image')) {
                 $data['image'] = UploadService::store($request->image, 'places');
@@ -256,14 +258,18 @@ class PlacesController extends Controller
 
 
             if ($request->address_type == 'map') {
-                // unset($request['address']);
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             } elseif ($request->address_type == 'link') {
-                unset($request['lat'], $request['long']);
                 $data['address'] = request('link');
+                $data['lat'] = null;
+                $data['long'] = null;
             } else {
-                // unset($request['address']);
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             }
-
 
 
             if (isset($request->active)) {

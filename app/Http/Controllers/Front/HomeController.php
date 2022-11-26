@@ -17,43 +17,58 @@ use App\Models\Region;
 use App\Models\Setting;
 use App\Models\Store;
 use App\Models\Swalef;
+use App\Models\User;
 use App\Models\ZadElgadel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
 
-    public function selected_places()
-    {
-        $categories = Category::all();
-        $regions = Region::all();
-        // $cities = City::all();
+    // public function selected_places()
+    // {
+    //     $categories = Category::all();
+    //     $regions = Region::all();
+    //     // $cities = City::all();
 
-        $seasons = [
-            "موسم الربيع",
-            "موسم الصيف",
-            "موسم الخريف",
-            "موسم الشتاء"
-        ];
-        $key_words = [];
-        foreach (Place::select('key_words')->get() as $key => $value) {
-            if ($value['key_words']) {
-                foreach ($value->key_words as $key => $value) {
-                    array_push($key_words, $value);
-                }
-            }
-        }
-        $prices = Price::all();
-        $places = [];
-        return view('front.selected_places', compact('key_words', 'categories', 'seasons', 'prices', 'regions', 'places'));
+    //     $seasons = [
+    //         "موسم الربيع",
+    //         "موسم الصيف",
+    //         "موسم الخريف",
+    //         "موسم الشتاء"
+    //     ];
+    //     $key_words = [];
+    //     foreach (Place::select('key_words')->get() as $key => $value) {
+    //         if ($value['key_words']) {
+    //             foreach ($value->key_words as $key => $value) {
+    //                 array_push($key_words, $value);
+    //             }
+    //         }
+    //     }
+    //     $prices = Price::all();
+    //     $places = [];
+    //     return view('front.selected_places2', compact('key_words', 'categories', 'seasons', 'prices', 'regions', 'places'));
+    // }
+
+    public function logout()
+    {
+        auth()->logout();
+        return back();
     }
 
     public function action_selected_places(Request $request)
     {
-
+        $request->validate([
+            'date' => 'required|after:today',
+            'days' => 'required',
+            'funny_days' => 'required'
+        ]);
+        // return $request->all();
         $places = Place::query(); //->take(10);
         $places = $places->where('price_id', request('price'));
         $places = $places->where('seasons', 'like', '%' . request('season') . '%');
@@ -86,7 +101,33 @@ class HomeController extends Controller
             }
         }
 
-        return $data;
+        if ($request->type == 'register' && $request->first_name && $request->last_name && $request->register_email && $request->register_password) {
+            $user = User::firstOrCreate([
+                'email' => $request->email
+            ], [
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->register_email,
+                'photo' => "assets/media/avatars/150-2.jpg",
+                'password' => Hash::make($request->register_password),
+            ]);
+
+            auth()->login($user);
+        } elseif ($request->type == 'login' && $request->email && $request->password) {
+            $user = auth()->attempt($request->only('email', 'password'));
+        }
+
+        $user = auth()->user();
+
+        if ($user) {
+            if (!Session::get($user->email)) {
+                Session::put($user->email, 'trip');
+            }
+        }
+
+
+        $places = $data;
+        return view('front.trip.selected_places', compact('places'));
     }
 
     public function index()
@@ -97,9 +138,31 @@ class HomeController extends Controller
         $stores_data =  Store::where('active', 1)->take(5)->get();
         $places_data = Place::where('featured', 1)->where('active', 1)->take(5)->get();
         $place_categories = Category::whereNull('parent_id')->get();
+
+
+        $categories = Category::all();
+        $regions = Region::all();
+        // $cities = City::all();
+
+        $seasons = [
+            "موسم الربيع",
+            "موسم الصيف",
+            "موسم الخريف",
+            "موسم الشتاء"
+        ];
+        $key_words = [];
+        foreach (Place::select('key_words')->get() as $key => $value) {
+            if ($value['key_words']) {
+                foreach ($value->key_words as $key => $value) {
+                    array_push($key_words, $value);
+                }
+            }
+        }
+        $prices = Price::all();
+
         return view('front.index', [
             'title' => __('dashboard.show_title', ['title' => __('dashboard.home')]),
-        ], compact('caravans', 'place_categories', 'stores_data', 'places_data', 'swalefs', 'zad_elgadels'));
+        ], compact('caravans', 'place_categories', 'stores_data', 'places_data', 'swalefs', 'zad_elgadels', 'key_words', 'categories', 'seasons', 'prices', 'regions'));
     }
 
     public function searchPlaces(Request $request)

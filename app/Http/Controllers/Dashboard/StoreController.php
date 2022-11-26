@@ -110,11 +110,28 @@ class StoreController extends Controller
                 $data['featured'] = 0;
             }
 
-            if ($request->address_type == null) {
-                $data['address_type'] = 'link';
+            // if ($request->address_type == null) {
+            //     $data['address_type'] = 'link';
+            // } elseif ($request->address_type == 'link') {
+            //     unset($request['lat'], $request['long']);
+            // }
+
+            if ($request->address_type == 'map') {
+                $data['address_type'] = 'map';
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             } elseif ($request->address_type == 'link') {
-                unset($request['lat'], $request['long']);
+                $data['address_type'] = 'link';
+                $data['address'] = request('address');
+                $data['lat'] = null;
+                $data['long'] = null;
+            } else {
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             }
+
 
             if (request('categories')) {
                 $data['categories'] = collect($request->categories)->map(fn ($i) => (int) $i);
@@ -210,17 +227,34 @@ class StoreController extends Controller
     public function update(UpdateStoreRequest $request, $id)
     {
         try {
-            $data = $request->only([
+             $data = $request->only([
                 'title', 'categories', 'featured', 'related_stores', 'near_places', 'address_type', 'address', 'lat', 'long', 'description', 'image',
                 'active', 'facebook_link', 'whatsapp', 'Instagram_link',
                 'website_link', 'visited',
             ]);
 
 
-            if ($request->address_type == null) {
-                $data['address_type'] = 'link';
+            
+            // if ($request->address_type == null) {
+            //     $data['address_type'] = 'link';
+            // } elseif ($request->address_type == 'link') {
+            //     unset($request['lat'], $request['long']);
+            // }
+
+            if ($request->address_type == 'map') {
+                $data['address_type'] = 'map';
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             } elseif ($request->address_type == 'link') {
-                unset($request['lat'], $request['long']);
+                $data['address_type'] = 'link';
+                $data['address'] = request('address');
+                $data['lat'] = null;
+                $data['long'] = null;
+            } else {
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             }
 
             if (isset($request->active)) {
@@ -243,6 +277,7 @@ class StoreController extends Controller
                 $data['image'] = UploadService::store($request->image, 'stores');
             }
 
+            
             $res = Store::updateOrCreate(['id' => $id], $data);
             DB::commit();
             if ($res) {

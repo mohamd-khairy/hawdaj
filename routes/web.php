@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+Route::get('cities', 'Dashboard\Settings\CityController@getCities')->name('cities');
+
 Auth::routes(['verify' => false]);
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'maintanis']], function () {
@@ -54,18 +56,18 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         /************************************ end stores     **********************************/
 
 
-         /************************************ zad_elgadel Request **********************************/
+        /************************************ zad_elgadel Request **********************************/
 
-         Route::resource('zad_elgadels', 'ZadElgadelController')->except('show');
-         Route::post('related_zad_elgadels/{id}', 'ZadElgadelController@related')->name('zad_elgadels.related');
-         Route::post('activate_zad_elgadel', 'ZadElgadelController@activate')->name('zad_elgadels.active');
-         Route::delete('destroy_zad_elgadels', 'ZadElgadelController@destroy_selected')->name('zad_elgadels.destroy_selected');
-         Route::post('near_places/{id}', 'ZadElgadelController@near')->name('zad_elgadels.near');
-         Route::get('restore_zad_elgadels/{id}', 'ZadElgadelController@restore')->name('zad_elgadels.restore');
- 
-         /************************************ end zad_elgadels     **********************************/
+        Route::resource('zad_elgadels', 'ZadElgadelController')->except('show');
+        Route::post('related_zad_elgadels/{id}', 'ZadElgadelController@related')->name('zad_elgadels.related');
+        Route::post('activate_zad_elgadel', 'ZadElgadelController@activate')->name('zad_elgadels.active');
+        Route::delete('destroy_zad_elgadels', 'ZadElgadelController@destroy_selected')->name('zad_elgadels.destroy_selected');
+        Route::post('near_placess/{id}', 'ZadElgadelController@near')->name('zad_elgadels.near');
+        Route::get('restore_zad_elgadels/{id}', 'ZadElgadelController@restore')->name('zad_elgadels.restore');
 
-         
+        /************************************ end zad_elgadels     **********************************/
+
+
         /**************************************** Users Routes *************************************/
         Route::group(['namespace' => 'Users'], function () {
             //Profile Routes
@@ -260,6 +262,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         Route::get('selected_places', 'HomeController@selected_places');
         Route::post('action_selected_places', 'HomeController@action_selected_places')->name('action_selected_places');
 
+
+        Route::get('/logout', 'HomeController@logout')->name('logout')->middleware('auth');
     });
     /*========================= Front Routes ==============================*/
 });
@@ -270,4 +274,3 @@ Route::get('api/handle-emails', function () {
 
 //Auth System
 Route::post('store-visitors', 'Dashboard\Visits\VisitorController@store');
-

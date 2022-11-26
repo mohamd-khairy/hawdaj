@@ -125,6 +125,9 @@
                                     {{ $store->region ? $store->region->name : '' }}</span>
                             </div>
                             <!-- <p class="mb-0 mt-3">{{ $store->address }}</p> -->
+                            @if($store->address_type == 'map')
+                            <p class="mb-0 mt-3">{{ $store->address }}</p>
+                            @endif
                         </div>
                         <!-- description -->
                         <div class="section-shadow section-radius p-3 p-sm-4 mb-4">

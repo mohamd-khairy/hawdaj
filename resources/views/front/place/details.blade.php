@@ -121,7 +121,9 @@
                                 <span>{{ $place->city ? $place->city->name : '' }} ,
                                     {{ $place->region ? $place->region->name : '' }}</span>
                             </div>
+                            @if($place->address_type == 'map')
                             <p class="mb-0 mt-3">{{ $place->address }}</p>
+                            @endif
                         </div>
                         <!-- description -->
                         <div class="section-shadow section-radius p-3 p-sm-4 mb-4">

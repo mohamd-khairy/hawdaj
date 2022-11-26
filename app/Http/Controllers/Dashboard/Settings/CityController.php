@@ -16,7 +16,7 @@ class CityController extends Controller
     //
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth'])->except('getCities');
         $this->middleware('permission:read-city', ['only' => ['index']]);
         $this->middleware('permission:create-city', ['only' => ['create', 'store']]);
         $this->middleware('permission:update-city', ['only' => ['edit', 'update']]);

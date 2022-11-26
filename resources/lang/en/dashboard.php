@@ -1313,4 +1313,5 @@ return array(
     /* make a trip popup */
     'ready_to_make_a_trip' => 'Ready to make a fabulous trip?!',
     'make_a_trip' => 'Make A Trip',
+    'continueAsAguest' => 'Continue As Aguest',
 );

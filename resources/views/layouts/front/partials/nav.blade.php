@@ -64,7 +64,7 @@
     </div>
 
     <ul class="social-media d-none d-lg-flex align-items-center">
-    @if(auth()->check() && in_array(1,auth()->user()->roles->pluck('pivot.role_id')->toArray()))
+        @if(auth()->check() && in_array(1,auth()->user()->roles->pluck('pivot.role_id')->toArray()))
 
         <li class="pl-4">
             <a href="{{url(app()->getLocale().'/dashboard')}}" target="_blank" class=" btn btn-primary">
@@ -73,6 +73,23 @@
         </li>
 
         @endif
+
+        @if(auth()->check())
+
+        <li class="pl-4">
+            <a href="{{url(app()->getLocale().'/dashboard')}}" target="_blank" class=" btn btn-primary">
+                ابدأ رحلتك
+            </a>
+        </li>
+
+        <li class="pl-4">
+            <a href="{{url(app()->getLocale().'/logout')}}" class=" btn btn-primary">
+                تسجيل الخروج
+            </a>
+        </li>
+
+        @endif
+
         <li>
             <a href="#" target="_blank">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" viewBox="0 0 22.999 23">

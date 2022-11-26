@@ -116,12 +116,22 @@ class ZadElgadelController extends Controller
                 $data['featured'] = 0;
             }
 
-            if ($request->address_type == null) {
-                $data['address_type'] = 'link';
+            if ($request->address_type == 'map') {
+                $data['address_type'] = 'map';
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             } elseif ($request->address_type == 'link') {
-                unset($request['lat'], $request['long']);
-                $data['address'] = request('link');
+                $data['address_type'] = 'link';
+                $data['address'] = request('address');
+                $data['lat'] = null;
+                $data['long'] = null;
+            } else {
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             }
+
 
             if (request('categories')) {
                 $data['categories'] = collect($request->categories)->map(fn ($i) => (int) $i);
@@ -226,11 +236,22 @@ class ZadElgadelController extends Controller
                 'website_link', 'visited','city_id','region_id'
             ]);
 
-            if ($request->address_type == null) {
-                $data['address_type'] = 'link';
+            if ($request->address_type == 'map') {
+                $data['address_type'] = 'map';
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             } elseif ($request->address_type == 'link') {
-                unset($request['lat'], $request['long']);
+                $data['address_type'] = 'link';
+                $data['address'] = request('address');
+                $data['lat'] = null;
+                $data['long'] = null;
+            } else {
+                $data['address'] = request('address');
+                $data['lat'] = request('lat');
+                $data['long'] = request('long');
             }
+
 
             if (isset($request->active)) {
                 $data['active'] = 1;
