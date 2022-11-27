@@ -1,3 +1,5 @@
+
+
 <nav class="navbar navbar-expand-lg navbar-dark px-3 px-sm-0">
     <a class="navbar-brand" href="/">
         <img src="{{asset('front_assets/imgs/logo.svg')}}" alt="هودج">
@@ -77,7 +79,8 @@
         @if(auth()->check())
 
         <li class="pl-4">
-            <a href="{{url(app()->getLocale().'/dashboard')}}" target="_blank" class=" btn btn-primary">
+            <!-- <a href="{{url(app()->getLocale().'/dashboard')}}" target="_blank" class=" btn btn-primary" onclick="makeATripPopupShow()"> -->
+            <button target="_blank" class=" btn btn-primary" onclick="makeATripPopupShow()">
                 ابدأ رحلتك
             </a>
         </li>
@@ -118,3 +121,12 @@
         </li>
     </ul>
 </nav>
+@include('front.trip.make_trip')
+@if (!auth()->check() || !\Illuminate\Support\Facades\Session::get(auth()->user()->email)) {
+
+<!-- make a trip popup -->
+
+
+@endif
+
+<script src="{{asset('dashboard_assets/js/dmukaZoom/make_a_trip_popup.js')}}"></script>

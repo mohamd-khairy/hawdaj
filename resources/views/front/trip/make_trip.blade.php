@@ -1,3 +1,164 @@
+<style>
+    /* make a trip popup start */
+
+    .popup_that_shows_on_startup #make_a_trip_popup{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 40%;
+        /* height: calc(100% - 100px); */
+        background-color: #fff;
+        z-index: 4;
+        margin-top: 100px;
+        margin-left: 30%;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #000;
+        padding: 25px 0 0;
+        text-align: center;
+        transition: all 0.5s;
+        visibility: visible;
+        opacity: 1;
+        overflow: hidden;
+    }
+
+    .popup_that_shows_on_startup #make_a_trip_popup.hide{
+        transition: all 0.5s;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .popup_that_shows_on_startup #make_a_trip_popup > h5{
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .popup_that_shows_on_startup #make_a_trip_popup .tabs{
+        flex-wrap: nowrap;
+    }
+
+    .popup_that_shows_on_startup #make_a_trip_popup .tabs > div{
+        padding-bottom: 25px;
+    }
+
+    .popup_that_shows_on_startup #make_a_trip_popup .main_tab, .popup_that_shows_on_startup #make_a_trip_popup .tab{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .popup_that_shows_on_startup #make_a_trip_popup .main_tab > p.description{
+        margin: 20px;
+    }
+
+    .popup_that_shows_on_startup #make_a_trip_popup .main_tab > button.make_a_trip_button{
+        border-radius: 50px;
+        padding: 10px 20px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        margin: 5px 0 0;
+        width: max-content;
+        align-self: center;
+        color: #2c085d;
+        border-color: #2c085d;
+    }
+
+    .popup_that_shows_on_startup #make_a_trip_popup .main_tab > button.make_a_trip_button:hover{
+        background-color: #2c085d;
+        color: #fff;
+    }
+
+    .popup_that_shows_on_startup #make_a_trip_popup .tab button.make_a_trip_button{
+        border: solid 2px #000;
+        font-weight: bold;
+        width: 100px;
+        border-radius: 50px;
+        font-weight: bold;
+    }
+
+    .popup_that_shows_on_startup #popup_background{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000000bd;
+        z-index: 999998;
+    }
+
+    .popup_that_shows_on_startup #popup_background.hide{
+        transition: all 0.5s;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .popup_that_shows_on_startup .tab{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .popup_that_shows_on_startup .tab > *:not(h6):not(.trip_categories):not(a):not(.navigation_buttons), #make_a_trip_popup .tab .trip_categories > span{
+        width: 70%;
+        margin: 5px auto;
+        height: 40px;
+        border-radius: 10px;
+        padding: 5px 10px;
+        border: 1px solid #bdbdbb;
+        cursor: pointer;
+    }
+
+    .popup_that_shows_on_startup .tab > select#categories, .popup_that_shows_on_startup .tab > select#key_words{
+        max-height: 75px;
+    }
+
+    .popup_that_shows_on_startup .tab > button#login, .popup_that_shows_on_startup .tab > button#register{
+        border: solid 2px #000;
+        font-weight: bold;
+        border-radius: 50px;
+        font-weight: bold;
+    }
+
+    .popup_that_shows_on_startup .tab > .navigation_buttons{
+        width: 70%;
+        margin: 5px auto;
+        height: 40px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #make_a_trip_popup .tab .trip_categories{
+        padding: 0 10px;
+    }
+
+    #make_a_trip_popup .tab .trip_categories > span{
+        width: fit-content;
+        display: inline-block;
+        margin: 10px;
+    }
+
+    #make_a_trip_popup .tab .trip_categories > span.active{
+        border-color: #2c085d;
+        background-color: #2c085d;
+        color: #fff;
+        transition: all 0.2s;
+    }
+
+    .popup_that_shows_on_startup .tab > input{
+        cursor: auto !important;
+    }
+
+    @media only screen and (max-width: 830px){
+        .popup_that_shows_on_startup #make_a_trip_popup{
+            width: 90%;
+            margin-top: 150px;
+            margin-left: 5%;
+        }
+    }
+
+    /* make a trip popup end */
+
+</style>
+
 <div class="popup_that_shows_on_startup" dir="ltr">
 
     <div id="make_a_trip_popup" class="container hide" style="z-index: 999999;">
