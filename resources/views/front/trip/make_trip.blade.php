@@ -62,7 +62,9 @@
         border-color: #2c085d;
     }
 
-    .popup_that_shows_on_startup #make_a_trip_popup .main_tab > button.make_a_trip_button:hover{
+    .popup_that_shows_on_startup #make_a_trip_popup .main_tab > button.make_a_trip_button:hover:not([disabled]),
+    .popup_that_shows_on_startup #make_a_trip_popup .tab button.make_a_trip_button:hover:not([disabled]),
+    .popup_that_shows_on_startup .tab > button:hover:not([disabled]){
         background-color: #2c085d;
         color: #fff;
     }
@@ -177,7 +179,7 @@
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
                     <h6>Select Date and Place</h6>
                     <input type="date" name="date" placeholder="date" id="date" required>
-                    <select name="region_id" id="region_id">
+                    <select name="region_id" id="region_id"  required>
                         <option value="">{{ __('dashboard.select_region') }}</option>
                         @foreach($regions as $region)
                         <option value="{{ $region->id }}" {{ old('region_id') == $region->id ? 'selected ': '' }}>{{ $region->name ?? '---' }}</option>
@@ -188,18 +190,18 @@
                     </select>
                     <div class="navigation_buttons">
                         <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(0)">{{__('dashboard.back')}}</button>
-                        <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(2)">{{__('dashboard.next')}}</button>
+                        <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(2)" disabled>{{__('dashboard.next')}}</button>
                     </div>
                 </div>
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
                     <h6>Specify Your Desired Trip</h6>
-                    <select name="season" id="season">
+                    <select name="season" id="season" required>
                         @foreach($seasons as $item)
                         <option value="{{$item}}">{{$item}}</option>
                         @endforeach
                     </select>
 
-                    <select name="price" id="price">
+                    <select name="price" id="price" required>
                         @foreach($prices as $item)
                         <option value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
@@ -208,7 +210,7 @@
                     <input type="number" name="funny_days" placeholder="funny days" id="funny_days" required>
                     <div class="navigation_buttons">
                         <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(1)">{{__('dashboard.back')}}</button>
-                        <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(3)">{{__('dashboard.next')}}</button>
+                        <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(3)" disabled>{{__('dashboard.next')}}</button>
                     </div>
                 </div>
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
@@ -231,7 +233,7 @@
 
                     <div class="navigation_buttons">
                         <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(2)">{{__('dashboard.back')}}</button>
-                        <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(4)">{{__('dashboard.next')}}</button>
+                        <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(4)">{{__('dashboard.next')}}</button>
                     </div>
                 </div>
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
@@ -239,9 +241,9 @@
 
                     
                     <h6>Log In</h6>
-                    <input type="email" name="email" placeholder="Email">
-                    <input type="password" name="password" placeholder="Password">
-                    <button type="button" id="login">{{__('dashboard.login')}}</button>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="button" id="login" disabled>{{__('dashboard.login')}}</button>
                     <button type="submit" class="">{{__('dashboard.continueAsAguest')}}</button>
 
                     <a href="#" onclick="makeATripNextTab(5)">{{__('dashboard.register')}}</a>
@@ -257,11 +259,11 @@
                 @if(!auth()->check())
                 <div class="tab hide col-12">
                     <h6>register </h6>
-                    <input type="text" name="first_name" placeholder="First Name">
-                    <input type="text" name="last_name" placeholder="Last Name">
-                    <input type="email" name="register_email" placeholder="Email">
-                    <input type="password" name="register_password" placeholder="Password">
-                    <button type="button" id="register">{{__('dashboard.register')}}</button>
+                    <input type="text" name="first_name" placeholder="First Name" required>
+                    <input type="text" name="last_name" placeholder="Last Name" required>
+                    <input type="email" name="register_email" placeholder="Email" required>
+                    <input type="password" name="register_password" placeholder="Password" required>
+                    <button type="button" id="register" disabled>{{__('dashboard.register')}}</button>
 
                     <div class="navigation_buttons">
                         <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(4)">{{__('dashboard.back')}}</button>
