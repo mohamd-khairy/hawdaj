@@ -244,7 +244,7 @@
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="password" name="password" placeholder="Password" required>
                     <button type="button" id="login" disabled>{{__('dashboard.login')}}</button>
-                    <button type="submit" class="">{{__('dashboard.continueAsAguest')}}</button>
+                    <button type="submit" id="as_a_guest" class="">{{__('dashboard.continueAsAguest')}}</button>
 
                     <a href="#" onclick="makeATripNextTab(5)">{{__('dashboard.register')}}</a>
                     @else

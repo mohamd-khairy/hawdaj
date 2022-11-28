@@ -63,3 +63,14 @@ $(".popup_that_shows_on_startup #make_a_trip_popup input[required], .popup_that_
     }
     // console.log(popup_input_values)
 });
+
+// *******************************
+// *******************************
+/* eliminating guest required bug */
+$('.popup_that_shows_on_startup #make_a_trip_popup button#as_a_guest').click(function(){
+    // alert('clicked')
+    $('.popup_that_shows_on_startup #make_a_trip_popup input[required]').prop('required', false);
+})
+
+// *******************************
+// *******************************
