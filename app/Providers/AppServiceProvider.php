@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use Illuminate\Pagination\Paginator;
 
 use App\Models\Notification;
+use App\Models\Place;
+use App\Models\Price;
+use App\Models\Region;
 use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -70,8 +74,31 @@ class AppServiceProvider extends ServiceProvider
                 view()->share(compact('title'));
 
             $settings = Setting::get();
+
+            $categories = Category::all();
+            $regions = Region::all();
+            // $cities = City::all();
+
+            $seasons = [
+                "موسم الربيع",
+                "موسم الصيف",
+                "موسم الخريف",
+                "موسم الشتاء"
+            ];
+            $key_words = [];
+            foreach (Place::select('key_words')->get() as $key => $value) {
+                if ($value['key_words']) {
+                    foreach ($value->key_words as $key => $value) {
+                        array_push($key_words, $value);
+                    }
+                }
+            }
+            $prices = Price::all();
+
+
             if ($settings)
-                view()->share(compact('settings'));
+                view()->share(compact('settings', 'key_words', 'categories', 'seasons', 'prices', 'regions'));
+
         } catch (\Exception $e) {
             //
         }

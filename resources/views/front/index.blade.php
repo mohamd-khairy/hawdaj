@@ -882,19 +882,13 @@
     <!-- tourist facilities -->
     </div>
 
-    @if (!auth()->check() || !\Illuminate\Support\Facades\Session::get(auth()->user()->email)) {
 
-    <!-- make a trip popup -->
-    @include('front.trip.make_trip')
-
-    @endif
 </main>
 
 
 @endsection
 
 @section('scripts')
-<script src="{{asset('dashboard_assets/js/dmukaZoom/make_a_trip_popup.js')}}"></script>
 <script>
     function myFunction(text) {
         if (text == '' || text === '' || text == null) {
@@ -995,32 +989,5 @@
         }
     }
 </script>
-<script>
-    $(document).on('change', '#region_id', function() {
-        // get cities
-        const region_id = $(this).val()
 
-        $.ajax({
-            type: "GET",
-            url: "{{ route('cities') }}",
-            data: {
-                region_id: region_id
-            },
-            success: function(data) {
-                $('#city_id').empty();
-                $('#city_id').append(data);
-            }
-        });
-    })
-
-
-    $(document).on('click', '#login', function() {
-        $('#type').val('login');
-        $('#trip_form').submit();
-    });
-    $(document).on('click', '#register', function() {
-        $('#type').val('register');
-        $('#trip_form').submit();
-    });
-</script>
 @endsection

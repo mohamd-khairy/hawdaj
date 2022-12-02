@@ -1033,9 +1033,15 @@ return [
     'fall_season' => 'الخريف',
     'winter_season' => 'الشتاء',
 
+    'zad_elgadels' => 'زاد الجادل',
+    'new_zad_elgadels' => 'زاد جادل جديد',
+    'edit_zad_elgadels' => 'تعديل زاد الجادل',
+
     /* make a trip popup */
     'ready_to_make_a_trip' => 'مستعد لحجز رحلة رائعة؟!',
     'make_a_trip' => 'احجز رحلتي',
     'continueAsAguest' => 'تسجيل ك ضيف',
+    'continue' => 'ابدأ'
+
 
 ];
