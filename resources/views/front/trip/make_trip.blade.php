@@ -86,7 +86,7 @@
     }
     
     .popup_that_shows_on_startup .tabs .right-side img{
-        width: 100%;
+        width: 85%;
         object-fit: contain;
     }
 
