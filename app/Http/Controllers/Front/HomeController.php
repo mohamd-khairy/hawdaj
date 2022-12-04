@@ -29,65 +29,54 @@ use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
-
-    // public function selected_places()
-    // {
-    //     $categories = Category::all();
-    //     $regions = Region::all();
-    //     // $cities = City::all();
-
-    //     $seasons = [
-    //         "موسم الربيع",
-    //         "موسم الصيف",
-    //         "موسم الخريف",
-    //         "موسم الشتاء"
-    //     ];
-    //     $key_words = [];
-    //     foreach (Place::select('key_words')->get() as $key => $value) {
-    //         if ($value['key_words']) {
-    //             foreach ($value->key_words as $key => $value) {
-    //                 array_push($key_words, $value);
-    //             }
-    //         }
-    //     }
-    //     $prices = Price::all();
-    //     $places = [];
-    //     return view('front.selected_places2', compact('key_words', 'categories', 'seasons', 'prices', 'regions', 'places'));
-    // }
-
     public function logout()
     {
         auth()->logout();
-        return back();
+        return redirect('/ar');
     }
 
     public function action_selected_places(Request $request)
     {
         $request->validate([
-            'date' => 'required|after:today',
+            'date' => 'required',
             'days' => 'required',
             'funny_days' => 'required'
         ]);
         // return $request->all();
         $places = Place::query(); //->take(10);
-        $places = $places->where('price_id', request('price'));
-        $places = $places->where('seasons', 'like', '%' . request('season') . '%');
+
+        if (request('price')) {
+            $places = $places->where('price_id', request('price'));
+        }
+
+        if (request('season')) {
+            $places = $places->where('seasons', 'like', '%' . request('season') . '%');
+        }
+
         $places = $places->when($request->region_id, function ($qq) use ($request) {
             return $qq->where('region_id', $request->region_id);
         });
+
         $places = $places->when($request->city_id, function ($qqq) use ($request) {
             return $qqq->where('city_id', $request->city_id);
         });
-        $places = $places->where(function ($q) {
-            foreach (request('key_words', []) as $key => $value) {
-                $q->orWhereJsonContains('key_words', $value);
-            }
-        });
-        $places = $places->where(function ($q) {
-            foreach (request('categories', []) as $key => $value) {
-                $q->orWhereJsonContains('categories', $value);
-            }
-        });
+
+        if (request('key_words', [])) {
+            $places = $places->where(function ($q) {
+                foreach (request('key_words', []) as $key => $value) {
+                    $q->orWhereJsonContains('key_words', $value);
+                }
+            });
+        }
+
+        if (request('categories', [])) {
+            $places = $places->where(function ($q) {
+                foreach (request('categories', []) as $key => $value) {
+                    $q->orWhereJsonContains('categories', $value);
+                }
+            });
+        }
+
         $places = $places->get();
 
         $data = [];
@@ -125,7 +114,6 @@ class HomeController extends Controller
             }
         }
 
-
         $places = $data;
         return view('front.trip.selected_places', compact('places'));
     }
@@ -139,30 +127,9 @@ class HomeController extends Controller
         $places_data = Place::where('featured', 1)->where('active', 1)->take(5)->get();
         $place_categories = Category::whereNull('parent_id')->get();
 
-
-        $categories = Category::all();
-        $regions = Region::all();
-        // $cities = City::all();
-
-        $seasons = [
-            "موسم الربيع",
-            "موسم الصيف",
-            "موسم الخريف",
-            "موسم الشتاء"
-        ];
-        $key_words = [];
-        foreach (Place::select('key_words')->get() as $key => $value) {
-            if ($value['key_words']) {
-                foreach ($value->key_words as $key => $value) {
-                    array_push($key_words, $value);
-                }
-            }
-        }
-        $prices = Price::all();
-
         return view('front.index', [
             'title' => __('dashboard.show_title', ['title' => __('dashboard.home')]),
-        ], compact('caravans', 'place_categories', 'stores_data', 'places_data', 'swalefs', 'zad_elgadels', 'key_words', 'categories', 'seasons', 'prices', 'regions'));
+        ], compact('caravans', 'place_categories', 'stores_data', 'places_data', 'swalefs', 'zad_elgadels'));
     }
 
     public function searchPlaces(Request $request)

@@ -147,12 +147,12 @@ class PlacesController extends Controller
                 $data['seasons'] = is_array($request->seasons) ? implode(',', $request->seasons) : null;
             }
 
-            if (request('new_key_words')) {
+            if (request('new_key_words' , null)) {
 
-                foreach (request('new_key_words') as $key => $value) {
+                foreach (request('new_key_words' , []) as $key => $value) {
                     $new[] = $value['new_key_words'];
                 }
-                $data['key_words'] = array_merge(request('key_words'), $new);
+                $data['key_words'] = array_merge(request('key_words' , []), $new);
                 unset($data['new_key_words']);
             }
 

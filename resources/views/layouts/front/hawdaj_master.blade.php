@@ -322,8 +322,13 @@
         </p>
       </div>
     </div> -->
+
     </footer> <!-- footer -->
     @endif
+
+    @include('front.trip.make_trip')
+    <!-- make a trip popup -->
+
     <!-- highcharts -->
     <script src="https://code.highcharts.com/maps/highmaps.js"></script>
     <!-- select2 plugin -->
@@ -374,7 +379,111 @@
 
     <script src="{{ asset('front_assets/js/main.bundle.js') }}"></script>
 
+    <!-- <script src="{{asset('dashboard_assets/js/dmukaZoom/make_a_trip_popup.js')}}"></script> -->
 
+    <script>
+        $(document).ready(function() {
+            @if((session()->get('show_trip') !== 0))
+                $('.popup_that_shows_on_startup #make_a_trip_popup').addClass('hide')
+                $('.popup_that_shows_on_startup #popup_background').addClass('hide')
+            @else
+            makeATripPopupShow()
+
+            @endif
+        })
+                
+
+        // *******************************
+        // *******************************
+        /* popup back and next buttons */
+        function makeATripNextTab(tabNum){
+            var val = -(tabNum * 100);
+            $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transition", "all 0.5s")
+            $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transform", `translateX(${val}%)`)
+        }
+
+        // *******************************
+        // *******************************
+        /* show hide popup */
+        function makeATripPopupShow(){
+            setTimeout(() => {
+                $('.popup_that_shows_on_startup #make_a_trip_popup').removeClass('hide')
+                $('.popup_that_shows_on_startup #popup_background').removeClass('hide')
+            }, 200);
+            $('.popup_that_shows_on_startup #popup_background').click(function(){
+                // alert('hi')
+                $('.popup_that_shows_on_startup #make_a_trip_popup').addClass('hide')
+                $('.popup_that_shows_on_startup #popup_background').addClass('hide')
+            })
+        }
+
+        // *******************************
+        // *******************************
+        /* only allow next when all required inputs are full */
+        var popup_input_values = false
+        $(".popup_that_shows_on_startup #make_a_trip_popup input[required], .popup_that_shows_on_startup #make_a_trip_popup select[required]").on("input", function() {
+            // alert('changed')
+            if ($(this).val()){
+                $(this).siblings('input[required], select[required]').each(function(index){
+                    if ($(this).val()){
+                        // alert($(this).val())
+                        popup_input_values = true;
+                    }
+                    else{
+                        popup_input_values = false;
+                        $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', true);
+                        $(this).siblings('#login, #register').prop('disabled', true);
+                        // alert(popup_input_values); 
+                        return;
+                    }
+                })
+            }
+            else{
+                $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', true);
+                $(this).siblings('#login, #register').prop('disabled', true);
+                popup_input_values = false;
+                // alert(popup_input_values); 
+            }
+            if(popup_input_values){
+                $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', false);
+                $(this).siblings('#login, #register').prop('disabled', false);
+            }
+            // console.log(popup_input_values)
+        });
+
+        $('.popup_that_shows_on_startup #make_a_trip_popup button#as_a_guest').click(function(){
+            // alert('clicked')
+            $('.popup_that_shows_on_startup #make_a_trip_popup input[required]').prop('required', false);
+        })
+
+
+        $(document).on('change', '#region_id', function() {
+            // get cities
+            const region_id = $(this).val()
+
+            $.ajax({
+                type: "GET",
+                url: "{{ route('cities') }}",
+                data: {
+                    region_id: region_id
+                },
+                success: function(data) {
+                    $('#city_id').empty();
+                    $('#city_id').append(data);
+                }
+            });
+        })
+
+
+        $(document).on('click', '#login', function() {
+            $('#type').val('login');
+            $('#trip_form').submit();
+        });
+        $(document).on('click', '#register', function() {
+            $('#type').val('register');
+            $('#trip_form').submit();
+        });
+    </script>
 </body>
 
 </html>

@@ -1033,22 +1033,15 @@ return [
     'fall_season' => 'الخريف',
     'winter_season' => 'الشتاء',
 
+    'zad_elgadels' => 'زاد الجادل',
+    'new_zad_elgadels' => 'زاد جادل جديد',
+    'edit_zad_elgadels' => 'تعديل زاد الجادل',
+
     /* make a trip popup */
     'ready_to_make_a_trip' => 'مستعد لحجز رحلة رائعة؟!',
     'make_a_trip' => 'احجز رحلتي',
     'continueAsAguest' => 'تسجيل ك ضيف',
-    'select_date_place' => 'اختر اليوم والمكان',
-    'specify_trip' => 'حدد نوع الرحلة',
-    'select_many' => 'اختر قدر ما تشاء',
-    'first_name' => 'الاسم الأول',
-    'last_name' => 'الاسم الأخير',
-    'email' => 'الإيميل',
-    'password' => 'كلمة السر',
-    'days' => 'عدد الأيام',
-    'funny_days' => 'أيام التسلية',
-    'select_season' => 'اختر الفصل',
-    'select_trip_type' => 'اختر نوع الرحلة',
-    'advanced_options' => 'خيارات متقدمة',
+    'continue' => 'ابدأ'
 
 
 ];

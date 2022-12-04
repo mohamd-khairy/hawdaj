@@ -76,14 +76,14 @@
 
         @endif
 
-        @if(auth()->check())
-
         <li class="pl-4">
             <!-- <a href="{{url(app()->getLocale().'/dashboard')}}" target="_blank" class=" btn btn-primary" onclick="makeATripPopupShow()"> -->
             <button target="_blank" class=" btn btn-primary" onclick="makeATripPopupShow()">
                 ابدأ رحلتك
             </a>
         </li>
+
+        @if(auth()->check())
 
         <li class="pl-4">
             <a href="{{url(app()->getLocale().'/logout')}}" class=" btn btn-primary">
@@ -121,12 +121,5 @@
         </li>
     </ul>
 </nav>
-@include('front.trip.make_trip')
-@if (!auth()->check() || !\Illuminate\Support\Facades\Session::get(auth()->user()->email)) {
-
-<!-- make a trip popup -->
 
 
-@endif
-
-<script src="{{asset('dashboard_assets/js/dmukaZoom/make_a_trip_popup.js')}}"></script>
