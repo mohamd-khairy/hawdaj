@@ -87,7 +87,9 @@
     
     .popup_that_shows_on_startup .tabs .right-side img{
         width: 85%;
-        object-fit: contain;
+        object-fit: cover;
+        height: 90%;
+        border-radius: 50px;
     }
 
     .popup_that_shows_on_startup #make_a_trip_popup .main_tab > .left-side > button.make_a_trip_button:hover:not([disabled]),
@@ -135,6 +137,17 @@
         padding: 5px 10px;
         border: 1px solid #bdbdbb;
         cursor: pointer;
+    }
+
+    .popup_that_shows_on_startup .tab > .left-side > input#date{
+        background-color: #2c085d;
+        color: #fff;
+    }
+
+    ::-webkit-calendar-picker-indicator{
+        color: #fff;
+        background-color: #fff;
+        border-radius: 5px
     }
 
     .popup_that_shows_on_startup .tab > .left-side > label{
