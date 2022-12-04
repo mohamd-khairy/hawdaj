@@ -1,3 +1,15 @@
+<!-- Include Twitter Bootstrap and jQuery: -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" type="text/css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+ 
+<!-- Include the plugin's CSS and JS: -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/js/bootstrap-multiselect.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/css/bootstrap-multiselect.css" type="text/css"/>
+
+
+
 <style>
     /* make a trip popup start */
 
@@ -27,7 +39,7 @@
         opacity: 0;
     }
 
-    .popup_that_shows_on_startup #make_a_trip_popup > h5{
+    .popup_that_shows_on_startup #make_a_trip_popup h5{
         margin-bottom: 20px;
         font-weight: bold;
         width: 60%;
@@ -70,11 +82,11 @@
     
     .popup_that_shows_on_startup .tabs .right-side{
         width: 40%;
+        text-align: start;
     }
     
     .popup_that_shows_on_startup .tabs .right-side img{
-        height: 75%;
-        width: 85%;
+        width: 100%;
         object-fit: contain;
     }
 
@@ -115,14 +127,20 @@
         width: 100%;
     }
 
-    .popup_that_shows_on_startup .tab > .left-side > *:not(h6):not(.trip_categories):not(a):not(.navigation_buttons), #make_a_trip_popup .tab .trip_categories > span{
+    .popup_that_shows_on_startup .tab > .left-side > *:not(h6):not(.trip_categories):not(a):not(.navigation_buttons):not(label), #make_a_trip_popup .tab .trip_categories > span{
         width: 70%;
-        margin: 5px auto;
+        margin: 0 auto;
         height: 40px;
         border-radius: 10px;
         padding: 5px 10px;
         border: 1px solid #bdbdbb;
         cursor: pointer;
+    }
+
+    .popup_that_shows_on_startup .tab > .left-side > label{
+        margin: 5px auto 0;
+        width: 70%;
+        text-align: start;
     }
 
     .popup_that_shows_on_startup .tab > .left-side > select#categories, .popup_that_shows_on_startup .tab > .left-side > select#key_words{
@@ -134,11 +152,12 @@
         font-weight: bold;
         border-radius: 50px;
         font-weight: bold;
+        margin-top: 10px;
     }
 
     .popup_that_shows_on_startup .tab > .left-side > .navigation_buttons{
         width: 70%;
-        margin: 5px auto;
+        margin: 10px auto 0;
         height: 40px;
         display: flex;
         justify-content: space-evenly;
@@ -180,7 +199,9 @@
 <div class="popup_that_shows_on_startup" dir="ltr">
 
     <div id="make_a_trip_popup" class="container hide" style="z-index: 999999;">
-        <h5>{{__('dashboard.ready_to_make_a_trip')}}</h5>
+        <div dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}">
+            <h5>{{__('dashboard.ready_to_make_a_trip')}}</h5>
+        </div>
         <form action="{{ route('front.action_selected_places') }}" method="POST" id="trip_form">
             <input type="hidden" name="type" id="type" value="guest">
             @csrf
@@ -193,20 +214,23 @@
                         <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(1)">{{__('dashboard.make_a_trip')}}</button>
                         </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/popup_1.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/make_a_trip.png') }}" alt="fabulous trip image">
                     </div>
                 </div>
 
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
                     <div class="left-side">
-                        <h6>Select Date and Place</h6>
-                        <input type="date" name="date" placeholder="date" id="date" required>
+                        <!-- <h6>{{__('dashboard.select_date_place')}}</h6> -->
+                        <label for="date">{{__('dashboard.select_date')}}</label>
+                        <input type="date" name="date" placeholder="" id="date" required>
+                        <label for="region_id">{{__('dashboard.select_region')}}</label>
                         <select name="region_id" id="region_id"  required>
                             <option value="">{{ __('dashboard.select_region') }}</option>
                             @foreach($regions as $region)
                             <option value="{{ $region->id }}" {{ old('region_id') == $region->id ? 'selected ': '' }}>{{ $region->name ?? '---' }}</option>
                             @endforeach
                         </select>
+                        <label for="city_id">{{__('dashboard.select_city')}}</label>
                         <select name="city_id" id="city_id">
                             <option value="">{{ __('dashboard.select_city') }}</option>
                         </select>
@@ -216,46 +240,49 @@
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/popup_1.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/pick_city_and date.png') }}" alt="fabulous trip image">
                     </div>
                 </div>
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
                     <div class="left-side">
-                        <h6>Specify Your Desired Trip</h6>
+                        <!-- <h6>{{__('dashboard.specify_trip')}}</h6> -->
+                        <label for="season">{{__('dashboard.select_season')}}</label>
                         <select name="season" id="season" required>
                             @foreach($seasons as $item)
                             <option value="{{$item}}">{{$item}}</option>
                             @endforeach
                         </select>
-
+                        <label for="price">{{__('dashboard.select_price')}}</label>
                         <select name="price" id="price" required>
                             @foreach($prices as $item)
                             <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
                         </select>
-                        <input type="number" name="days" placeholder="days" id="days" required>
-                        <input type="number" name="funny_days" placeholder="funny days" id="funny_days" required>
+                        <label for="days">{{__('dashboard.days')}}</label>
+                        <input type="number" name="days" placeholder="" id="days" required>
+                        <label for="funny_days">{{__('dashboard.funny_days')}}</label>
+                        <input type="number" name="funny_days" placeholder="" id="funny_days" required>
                         <div class="navigation_buttons">
                             <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(1)">{{__('dashboard.back')}}</button>
                             <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(3)" disabled>{{__('dashboard.next')}}</button>
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/popup_1.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/pick_season_and days.png') }}" alt="fabulous trip image">
                     </div>
                 </div>
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
                     <div class="left-side">
-                        <h6>Select as Many as You Like</h6>
-
-                        <select style="height: 150px;" name="key_words[]" id="key_words" multiple>
+                        <!-- <h6>{{__('dashboard.select_many')}}</h6> -->
+                        <label for="key_words">{{__('dashboard.select_trip_type')}}</label>
+                        <select style="height: 150px;" name="key_words[]" id="example-getting-started" multiple>
                             @foreach($key_words as $item)
                             <option value="{{$item}}">{{$item}}</option>
                             @endforeach
                         </select>
 
-                        <h6>Select as Many as You Like</h6>
-
+                        <!-- <h6>{{__('dashboard.select_many')}}</h6> -->
+                        <label for="categories">{{__('dashboard.advanced_options')}}</label>
                         <select style="height: 150px;" name="categories[]" id="categories" multiple>
                             @foreach($categories as $item)
                             <option value="{{$item->id}}">{{$item->name}}</option>
@@ -268,7 +295,7 @@
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/popup_1.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/categories.png') }}" alt="fabulous trip image">
                     </div>
                 </div>
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
@@ -276,9 +303,11 @@
                         @if(!auth()->check())
 
                     
-                        <h6>Log In</h6>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <input type="password" name="password" placeholder="Password" required>
+                        <!-- <h6>{{__('dashboard.login')}}</h6> -->
+                        <label>{{__('dashboard.email')}}</label>
+                        <input type="email" name="email" placeholder="" required>
+                        <label>{{__('dashboard.password')}}</label>
+                        <input type="password" name="password" placeholder="" required>
                         <button type="button" id="login" disabled>{{__('dashboard.login')}}</button>
                         <button type="submit" id="as_a_guest" class="">{{__('dashboard.continueAsAguest')}}</button>
 
@@ -292,18 +321,22 @@
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/popup_1.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/make_a_trip.png') }}" alt="fabulous trip image">
                     </div>
                 </div>
 
                 @if(!auth()->check())
-                <div class="tab hide col-12">
+                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
                     <div class="left-side">
-                        <h6>register </h6>
-                        <input type="text" name="first_name" placeholder="First Name" required>
-                        <input type="text" name="last_name" placeholder="Last Name" required>
-                        <input type="email" name="register_email" placeholder="Email" required>
-                        <input type="password" name="register_password" placeholder="Password" required>
+                        <!-- <h6>{{__('dashboard.register')}}</h6> -->
+                        <label>{{__('dashboard.first_name')}}</label>
+                        <input type="text" name="first_name" placeholder="" required>
+                        <label>{{__('dashboard.last_name')}}</label>
+                        <input type="text" name="last_name" placeholder="" required>
+                        <label>{{__('dashboard.email')}}</label>
+                        <input type="email" name="register_email" placeholder="" required>
+                        <label>{{__('dashboard.password')}}</label>
+                        <input type="password" name="register_password" placeholder="" required>
                         <button type="button" id="register" disabled>{{__('dashboard.register')}}</button>
 
                         <div class="navigation_buttons">
@@ -311,7 +344,7 @@
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/popup_1.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/make_a_trip.png') }}" alt="fabulous trip image">
                     </div>
                 </div>
                 @endif
@@ -321,3 +354,10 @@
     </div>
     <div id="popup_background"></div>
 </div>
+
+<!-- Initialize the plugin: -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example-getting-started').multiselect();
+    });
+</script>

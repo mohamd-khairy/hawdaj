@@ -1314,4 +1314,17 @@ return array(
     'ready_to_make_a_trip' => 'Ready to make a fabulous trip?!',
     'make_a_trip' => 'Make A Trip',
     'continueAsAguest' => 'Continue As Aguest',
+    'select_date_place' => 'Select Date and Place',
+    'specify_trip' => 'Specify Your Desired Trip',
+    'select_many' => 'Select As Many As You Like',
+    'first_name' => 'First Name',
+    'last_name' => 'Last Name',
+    'email' => 'Email',
+    'password' => 'Password',
+    'days' => 'Days',
+    'funny_days' => 'Funny Days',
+    'select_season' => 'Select Season',
+    'select_trip_type' => 'Select Trip Type',
+    'advanced_options' => 'Advanced Options',
+
 );
