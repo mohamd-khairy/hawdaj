@@ -1041,7 +1041,13 @@ return [
     'ready_to_make_a_trip' => 'مستعد لحجز رحلة رائعة؟!',
     'make_a_trip' => 'احجز رحلتي',
     'continueAsAguest' => 'تسجيل ك ضيف',
-    'continue' => 'ابدأ'
 
+    'continue' => 'ابدأ',
+    
+    'select_season' => 'اختر الموسم',
+    'days' => 'عدد الأيام',
+    'funny_days' => 'عدد أيام التسلية',
+    'select_trip_type' => 'اختر نوع الرحلة',
+    'advanced_options' => 'خيارات متقدمة',
 
 ];

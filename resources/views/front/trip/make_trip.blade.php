@@ -1,14 +1,4 @@
-<!-- Include Twitter Bootstrap and jQuery: -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" type="text/css"/>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
- 
-<!-- Include the plugin's CSS and JS: -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/js/bootstrap-multiselect.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/css/bootstrap-multiselect.css" type="text/css"/>
-
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 <style>
     /* make a trip popup start */
@@ -197,6 +187,64 @@
         cursor: auto !important;
     }
 
+    /* select2 lib start */
+    .select2-container--open .select2-dropdown--below{
+        z-index: 9999999;
+    }
+
+    .select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow{
+        left: 15px;
+        right: auto;
+        top: 5px;
+    }
+
+    .popup_that_shows_on_startup .tab > .left-side > .select2{
+        border: none !important;
+        padding: 0 !important;
+        height: fit-content !important;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered{
+        text-align: start
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice{
+        padding-right: 5px;
+        background-color: #2c085d;
+        color: #fff;
+        border: none;
+    }
+
+    .select2-results__option{
+        cursor: pointer;
+    }
+    
+    .select2-results__option:hover{
+        background-color: #e5e5e5;
+    }
+
+    .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove{
+        color: #fff;
+    }
+
+    .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove:hover{
+        background: transparent;
+    }
+    /* select2 lib end */
+    /* loader start */
+    .popup_that_shows_on_startup #make_a_trip_popup .loader_infinity{
+        position: absolute;
+        left: 38%;
+        top: 35%;
+        width: 150px;
+        transition: all 0.2s;
+    }
+
+    .popup_that_shows_on_startup #make_a_trip_popup .loader_infinity.hide{
+        display:none;
+    }
+    /* loader end */
+
     @media only screen and (max-width: 830px){
         .popup_that_shows_on_startup #make_a_trip_popup{
             width: 90%;
@@ -218,6 +266,7 @@
         <form action="{{ route('front.action_selected_places') }}" method="POST" id="trip_form">
             <input type="hidden" name="type" id="type" value="guest">
             @csrf
+            <img class="loader_infinity hide" src="{{ asset('front_assets/imgs/popup_images/Infinity_loader.gif') }}" alt="fabulous trip image">
             <div class="tabs row">
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="main_tab col-12">
                     <div class="left-side">
@@ -237,14 +286,14 @@
                         <label for="date">{{__('dashboard.select_date')}}</label>
                         <input type="date" name="date" placeholder="" id="date" required>
                         <label for="region_id">{{__('dashboard.select_region')}}</label>
-                        <select name="region_id" id="region_id"  required>
-                            <option value="">{{ __('dashboard.select_region') }}</option>
+                        <select class="select2" name="region_id" id="region_id"  required>
+                            <!-- <option value="">{{ __('dashboard.select_region') }}</option> -->
                             @foreach($regions as $region)
                             <option value="{{ $region->id }}" {{ old('region_id') == $region->id ? 'selected ': '' }}>{{ $region->name ?? '---' }}</option>
                             @endforeach
                         </select>
                         <label for="city_id">{{__('dashboard.select_city')}}</label>
-                        <select name="city_id" id="city_id">
+                        <select class="select2" name="city_id" id="city_id">
                             <option value="">{{ __('dashboard.select_city') }}</option>
                         </select>
                         <div class="navigation_buttons">
@@ -260,13 +309,13 @@
                     <div class="left-side">
                         <!-- <h6>{{__('dashboard.specify_trip')}}</h6> -->
                         <label for="season">{{__('dashboard.select_season')}}</label>
-                        <select name="season" id="season" required>
+                        <select class="select2" name="season" id="season" required>
                             @foreach($seasons as $item)
                             <option value="{{$item}}">{{$item}}</option>
                             @endforeach
                         </select>
                         <label for="price">{{__('dashboard.select_price')}}</label>
-                        <select name="price" id="price" required>
+                        <select class="select2" name="price" id="price" required>
                             @foreach($prices as $item)
                             <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
@@ -288,7 +337,7 @@
                     <div class="left-side">
                         <!-- <h6>{{__('dashboard.select_many')}}</h6> -->
                         <label for="key_words">{{__('dashboard.select_trip_type')}}</label>
-                        <select style="height: 150px;" name="key_words[]" id="example-getting-started" multiple>
+                        <select class="select2" style="height: 150px;" name="key_words[]" id="example-getting-started" multiple>
                             @foreach($key_words as $item)
                             <option value="{{$item}}">{{$item}}</option>
                             @endforeach
@@ -296,7 +345,7 @@
 
                         <!-- <h6>{{__('dashboard.select_many')}}</h6> -->
                         <label for="categories">{{__('dashboard.advanced_options')}}</label>
-                        <select style="height: 150px;" name="categories[]" id="categories" multiple>
+                        <select class="select2" style="height: 150px;" name="categories[]" id="categories" multiple>
                             @foreach($categories as $item)
                             <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
@@ -368,9 +417,11 @@
     <div id="popup_background"></div>
 </div>
 
-<!-- Initialize the plugin: -->
-<script type="text/javascript">
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+
+<script>
     $(document).ready(function() {
-        $('#example-getting-started').multiselect();
+        $('.select2').select2();
     });
 </script>
