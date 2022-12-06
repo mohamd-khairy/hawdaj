@@ -408,6 +408,12 @@
                 $('.popup_that_shows_on_startup #make_a_trip_popup .loader_infinity').addClass('hide')
                 $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("opacity","1")
             }, 600);
+            // the following part is to control length of pages in popup
+            if(tabNum == 4){
+                $('.popup_that_shows_on_startup #make_a_trip_popup .tab.registerPage').addClass('hide')
+            }else if(tabNum == 5){
+                $('.popup_that_shows_on_startup #make_a_trip_popup .tab.registerPage').removeClass('hide')
+            }
         }
 
         // *******************************

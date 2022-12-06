@@ -119,8 +119,12 @@
         width: 100%;
     }
 
+    .popup_that_shows_on_startup .tab.registerPage.hide{
+        display: none !important;
+    }
+
     .popup_that_shows_on_startup .tab > .left-side > *:not(h6):not(.trip_categories):not(a):not(.navigation_buttons):not(label), #make_a_trip_popup .tab .trip_categories > span{
-        width: 70%;
+        width: 70% !important;
         margin: 0 auto;
         height: 40px;
         border-radius: 10px;
@@ -280,7 +284,7 @@
                     </div>
                 </div>
 
-                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
+                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
                     <div class="left-side">
                         <!-- <h6>{{__('dashboard.select_date_place')}}</h6> -->
                         <label for="date">{{__('dashboard.select_date')}}</label>
@@ -305,7 +309,7 @@
                         <img src="{{ asset('front_assets/imgs/popup_images/pick_city_and date.png') }}" alt="fabulous trip image">
                     </div>
                 </div>
-                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
+                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
                     <div class="left-side">
                         <!-- <h6>{{__('dashboard.specify_trip')}}</h6> -->
                         <label for="season">{{__('dashboard.select_season')}}</label>
@@ -333,7 +337,7 @@
                         <img src="{{ asset('front_assets/imgs/popup_images/pick_season_and days.png') }}" alt="fabulous trip image">
                     </div>
                 </div>
-                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
+                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
                     <div class="left-side">
                         <!-- <h6>{{__('dashboard.select_many')}}</h6> -->
                         <label for="key_words">{{__('dashboard.select_trip_type')}}</label>
@@ -360,7 +364,7 @@
                         <img src="{{ asset('front_assets/imgs/popup_images/categories.png') }}" alt="fabulous trip image">
                     </div>
                 </div>
-                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
+                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
                     <div class="left-side">
                         @if(!auth()->check())
 
@@ -388,7 +392,7 @@
                 </div>
 
                 @if(!auth()->check())
-                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12">
+                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12 registerPage">
                     <div class="left-side">
                         <!-- <h6>{{__('dashboard.register')}}</h6> -->
                         <label>{{__('dashboard.first_name')}}</label>
