@@ -11,7 +11,7 @@
         /* height: calc(100% - 100px); */
         background-color: #fff;
         z-index: 4;
-        margin-top: 75px;
+        margin-top: 50px;
         margin-left: 15%;
         border-radius: 10px;
         box-shadow: 0 0 10px #000;
@@ -67,7 +67,7 @@
         width: 60%;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        margin: auto;
     }
     
     .popup_that_shows_on_startup .tabs .right-side{
@@ -78,7 +78,8 @@
     .popup_that_shows_on_startup .tabs .right-side img{
         width: 85%;
         object-fit: cover;
-        height: 90%;
+        height: 350px;
+        min-height: 90%;
         border-radius: 50px;
     }
 
@@ -123,25 +124,58 @@
         display: none !important;
     }
 
-    .popup_that_shows_on_startup .tab > .left-side > *:not(h6):not(.trip_categories):not(a):not(.navigation_buttons):not(label), #make_a_trip_popup .tab .trip_categories > span{
+    .popup_that_shows_on_startup .tab > .left-side > *:not(h6):not(.trip_categories):not(a):not(.navigation_buttons):not(label):not(.timetable_container), #make_a_trip_popup .tab .trip_categories > span{
         width: 70% !important;
-        margin: 0 auto;
-        height: 40px;
+        margin: 0 auto 20px;
+        height: 40px !important;
         border-radius: 10px;
-        padding: 5px 10px;
-        border: 1px solid #bdbdbb;
+        padding: 5px 10px !important;
+        border: 1px solid #2c085d !important;
         cursor: pointer;
+        background-color: hsl(231, 20%, 85%);
     }
 
-    .popup_that_shows_on_startup .tab > .left-side > input#date{
+    .select2-container{
+        z-index: 999999;
+    }
+
+    .popup_that_shows_on_startup .tab > .left-side > .select2.select2-container.select2-container--default.select2-container--below{
+        height: fit-content !important;
+    }
+
+    /* .popup_that_shows_on_startup .tab > .left-side > input#date{
         background-color: #2c085d;
         color: #fff;
+    } */
+
+    input::-webkit-calendar-picker-indicator{
+        display: none;
     }
 
     ::-webkit-calendar-picker-indicator{
         color: #fff;
         background-color: #fff;
         border-radius: 5px
+    }
+
+    ::-webkit-inner-spin-button{
+        cursor: pointer;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow{
+        height: 100%;
+        width: 30px;
+    }
+
+    .popup_that_shows_on_startup .tab > .left-side > label::after{
+        content: '*';
+        color: red;
+        font-size: 20px;
+        margin: 0 10px;
+    }
+    
+    .popup_that_shows_on_startup .tab > .left-side > label.not_required::after{
+        content: '' !important;
     }
 
     .popup_that_shows_on_startup .tab > .left-side > label{
@@ -190,10 +224,33 @@
     .popup_that_shows_on_startup .tab > .left-side > input{
         cursor: auto !important;
     }
+    
+    .popup_that_shows_on_startup .tab > .left-side > input#date{
+        cursor: pointer !important;
+    }
 
     /* select2 lib start */
-    .select2-container--open .select2-dropdown--below{
+    .select2-container--default .select2-selection--single, .select2-selection{
+        background-color: #d1d3e0 !important;
+        border: none !important;
+    }
+
+    .select2-search--inline{
+        display: inline;
+    }
+
+    .select2-container--default .select2-search--dropdown .select2-search__field,
+    .select2-dropdown.select2-dropdown--above{
+        border: 1px solid #2c085d;
+        border-radius: 10px;
+    }
+
+    .select2-container--open .select2-dropdown--below,
+    .select2-dropdown.select2-dropdown--above{
         z-index: 9999999;
+        background-color: #d1d3e0;
+        border-radius: 10px;
+        border: solid 1px #2c085d;
     }
 
     .select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow{
@@ -209,7 +266,8 @@
     }
 
     .select2-container .select2-selection--single .select2-selection__rendered{
-        text-align: start
+        text-align: start;
+        background-color: hsl(231, 20%, 85%);
     }
 
     .select2-container--default .select2-selection--multiple .select2-selection__choice{
@@ -217,6 +275,7 @@
         background-color: #2c085d;
         color: #fff;
         border: none;
+        margin-top: 2px;
     }
 
     .select2-results__option{
@@ -248,6 +307,96 @@
         display:none;
     }
     /* loader end */
+    /* timetable start */
+    @import url('https://fonts.googleapis.com/css?family=Ubuntu:500&display=swap');
+
+    .timetable_container{
+        position: absolute;
+        z-index: 9999999;
+        left: 200px;
+    }
+    .timetable_container.hide{
+        display: none;
+    }
+
+	.timetable_container .calendar {
+        box-shadow: 0 0 10px #878787;
+        padding: 1em;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        grid-template-columns: repeat(7, 1fr);
+        grid-auto-rows: max-content;
+        grid-auto-flow: row;
+        color: black;
+        background-color: hsl(231, 20%, 85%);
+	}
+
+	.timetable_container .cell {
+        padding: 0.4em 0.8em;
+        text-align: center;
+        
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+	}
+
+    .timetable_container .cell:not(.cell--unselectable){
+        cursor: pointer;
+    }
+
+	.timetable_container .cell:hover, .cell:focus {
+        color: hsl(231, 20%, 85%);
+        background-color: #2c085d;
+        border-radius: 10px;
+    }
+
+	.timetable_container .cell:empty {
+        width: 0;
+        padding: 0;
+	}
+
+	.timetable_container .cell--unselectable {
+	    color: hsl(231, 20%, 50%);
+	}
+
+	.timetable_container .cell--unselectable:hover, .cell--unselectable:focus {
+        color: hsl(231, 20%, 50%);
+        background-color: transparent;
+	}
+
+	.timetable_container .date-text {
+        padding: 1em 0.8em;
+        grid-column: 1 / 5;
+        justify-self: start;
+        display: flex;
+        align-items: center;
+        
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+	}
+
+	.timetable_container .button {
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+	}
+
+	/* OTHER */
+	
+	.timetable_container {
+        height: 200px;
+        width: fit-content;
+        
+        
+        font-family: 'Ubuntu', sans-serif;
+	}
+    /* timetable end */
 
     @media only screen and (max-width: 830px){
         .popup_that_shows_on_startup #make_a_trip_popup{
@@ -280,15 +429,19 @@
                         <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(1)">{{__('dashboard.make_a_trip')}}</button>
                         </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/make_a_trip.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/trip_5.jpg') }}" alt="fabulous trip image">
                     </div>
                 </div>
-
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
                     <div class="left-side">
-                        <!-- <h6>{{__('dashboard.select_date_place')}}</h6> -->
                         <label for="date">{{__('dashboard.select_date')}}</label>
-                        <input type="date" name="date" placeholder="" id="date" required>
+                        <!-- <input type="text" id="date" placeholder="xx/xx/xxxx"> -->
+                        <div class="timetable_container hide">
+                            <div id="calendar" class="calendar">
+                            <span>Add something here</span>
+                            </div>
+                        </div>
+                        <input type="date" placeholder="" id="date" onclick="openCalendar()" required>
                         <label for="region_id">{{__('dashboard.select_region')}}</label>
                         <select class="select2" name="region_id" id="region_id"  required>
                             <!-- <option value="">{{ __('dashboard.select_region') }}</option> -->
@@ -306,7 +459,7 @@
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/pick_city_and date.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/trip_4.jpg') }}" alt="fabulous trip image">
                     </div>
                 </div>
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
@@ -334,7 +487,7 @@
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/pick_season_and days.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/trip-3.jpg') }}" alt="fabulous trip image">
                     </div>
                 </div>
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
@@ -361,7 +514,7 @@
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/categories.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/trip_2.jpg') }}" alt="fabulous trip image">
                     </div>
                 </div>
                 <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
@@ -387,7 +540,7 @@
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/make_a_trip.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/trip_1.jpg') }}" alt="fabulous trip image">
                     </div>
                 </div>
 
@@ -410,7 +563,7 @@
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/make_a_trip.png') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/trip_5.jpg') }}" alt="fabulous trip image">
                     </div>
                 </div>
                 @endif
@@ -428,4 +581,204 @@
     $(document).ready(function() {
         $('.select2').select2();
     });
+</script>
+
+<script>
+    var calendarNode = document.querySelector("#calendar");
+
+    var currDate = new Date();
+    var currYear = currDate.getFullYear();
+    var currMonth = currDate.getMonth() + 1;
+
+    var selectedYear = currYear;
+    var selectedMonth = currMonth;
+    var selectedMonthName = getMonthName(selectedYear, selectedMonth);
+    var selectedMonthDays = getDayCount(selectedYear, selectedMonth);
+
+    renderDOM(selectedYear, selectedMonth);
+
+    function getMonthName (year, month) {
+        let selectedDate = new Date(year, month-1, 1);
+        return selectedDate.toLocaleString('default', { month: 'long' });
+    }
+
+    function getMonthText () {
+        // if (selectedYear === currYear)
+        //     return selectedMonthName;
+        // else
+            return selectedMonthName + ", " + selectedYear;
+    }
+
+    function getDayName (year, month, day) {
+        let selectedDate = new Date(year, month-1, day);
+        return selectedDate.toLocaleDateString('en-US',{weekday: 'long'});
+    }
+
+    function getDayCount (year, month) {
+        return 32 - new Date(year, month-1, 32).getDate();
+    }
+
+    function getDaysArray () {
+        let emptyFieldsCount = 0;
+        let emptyFields = [];
+        let days = [];
+
+        switch(getDayName(selectedYear, selectedMonth, 1))
+        {
+            case "Tuesday":
+                emptyFieldsCount = 1;
+                break;
+            case "Wednesday":
+                emptyFieldsCount = 2;
+                break;
+            case "Thursday":
+                emptyFieldsCount = 3;
+                break;
+            case "Friday":
+                emptyFieldsCount = 4;
+                break;
+            case "Saturday":
+                emptyFieldsCount = 5;
+                break;
+            case "Sunday":
+                emptyFieldsCount = 6;
+                break;
+        }
+    
+        emptyFields = Array(emptyFieldsCount).fill("");
+        days = Array.from(Array(selectedMonthDays + 1).keys());
+        days.splice(0, 1);
+        
+        return emptyFields.concat(days);
+    }
+
+    function renderDOM (year, month) {
+    let newCalendarNode = document.createElement("div");
+    newCalendarNode.id = "calendar";
+    newCalendarNode.className = "calendar";
+    
+    let dateText = document.createElement("div");
+    dateText.append(getMonthText());
+    dateText.className = "date-text";
+    newCalendarNode.append(dateText);
+    
+    let leftArrow = document.createElement("div");
+    leftArrow.append("«");
+    leftArrow.className = "button";
+    leftArrow.addEventListener("click", goToPrevMonth);
+    newCalendarNode.append(leftArrow);
+    
+    let curr = document.createElement("div");
+    curr.append("📅");
+    curr.className = "button";
+    curr.addEventListener("click", goToCurrDate);
+    newCalendarNode.append(curr);
+    
+    let rightArrow = document.createElement("div");
+    rightArrow.append("»");
+    rightArrow.className = "button";
+    rightArrow.addEventListener("click", goToNextMonth);
+    newCalendarNode.append(rightArrow);
+    
+    let dayNames = ["M", "T", "W", "T", "F", "S", "S"];
+    
+    dayNames.forEach((cellText) => {
+        let cellNode = document.createElement("div");
+        cellNode.className = "cell cell--unselectable";
+        cellNode.append(cellText);
+        newCalendarNode.append(cellNode);
+    });
+    
+    let days = getDaysArray(year, month);
+    
+    days.forEach((cellText) => {
+        let cellNode = document.createElement("div");
+        cellNode.className = "cell";
+        cellNode.append(cellText);
+        newCalendarNode.append(cellNode);
+    });
+    
+    calendarNode.replaceWith(newCalendarNode);
+    calendarNode = document.querySelector("#calendar");
+    }
+
+    function goToPrevMonth () {
+        selectedMonth--;
+        if (selectedMonth === 0) {
+            selectedMonth = 12;
+            selectedYear--;
+        }
+        selectedMonthDays = getDayCount(selectedYear, selectedMonth);
+        selectedMonthName = getMonthName(selectedYear, selectedMonth);
+    
+        renderDOM(selectedYear, selectedMonth);
+    }
+
+    function goToNextMonth () {
+        selectedMonth++;
+        if (selectedMonth === 13) {
+            selectedMonth = 1;
+            selectedYear++;
+        }
+        selectedMonthDays = getDayCount(selectedYear, selectedMonth);
+        selectedMonthName = getMonthName(selectedYear, selectedMonth);
+    
+        renderDOM(selectedYear, selectedMonth);
+    }
+
+    function goToCurrDate () {
+        selectedYear = currYear;
+        selectedMonth = currMonth;
+
+        selectedMonthDays = getDayCount(selectedYear, selectedMonth);
+        selectedMonthName = getMonthName(selectedYear, selectedMonth);
+    
+        renderDOM(selectedYear, selectedMonth);
+    }
+
+    // open calendar function
+    function openCalendar(){
+        $('.timetable_container.hide').removeClass('hide')
+    }
+    // function to pick date from calendar
+    $('.timetable_container').click(function(e){
+        if(e.target.className == 'cell'){
+            selectedDay = parseInt(e.target.textContent)
+            if((selectedDay+'').length == 1){selectedDay = '0' + selectedDay}
+            if((selectedMonth+'').length == 1){selectedMonth = '0' + selectedMonth}
+            var selectedDateByUser = (selectedYear + '-' + selectedMonth + '-' + selectedDay)
+            // alert(selectedDateByUser)
+            $('input#date').val(selectedDateByUser)
+            $('.timetable_container').addClass('hide')
+            $('.timetable_container').siblings('div.navigation_buttons').children('button.next').prop('disabled', false);
+        }
+    })
+
+    $(document).mouseup(function (e) {
+    if ($(e.target).closest(".timetable_container").length
+    === 0) {
+    // $(".container").hide();
+    // alert('outside')
+    $('.timetable_container').addClass('hide')
+    }
+    })
+</script>
+<script>
+    // required star function
+    var iii = 0
+    $(document).ready(()=>{
+        $('.left-side').each(function(){
+            $(this).children('input, select').each(function(){
+            console.log($(this).attr('name'))
+            if($(this).is('[required]')){
+            }else{
+                console.log('found one')
+                $(this).prev('label').addClass('not_required')
+            }
+        })
+        }
+        )
+    })
+    
+
 </script>

@@ -32,6 +32,25 @@
     <meta property="og:site_name" content="Hwdaj" />
     @endif
     <style>
+        /* ********************* */
+        /* scrollbar style start */   
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #2c085d;
+        }
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        /* scrollbar style end */
+        /* ******************* */
         .loader-container {
             position: fixed;
             top: 0;
@@ -439,6 +458,9 @@
             // alert('changed')
             if ($(this).val()){
                 $(this).siblings('input[required], select[required]').each(function(index){
+                    // if($(this).attr("class").includes('select2')){
+                    //     // alert('select2 is here!')
+                    // }
                     if ($(this).val()){
                         // alert($(this).val())
                         popup_input_values = true;
