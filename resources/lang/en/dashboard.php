@@ -1322,5 +1322,7 @@ return array(
     'funny_days' => 'Funny Days Number',
     'select_trip_type' => 'Select Trip Type',
     'advanced_options' => 'Advanced Options',
-    'continue' => 'Continue'
+    'continue' => 'Continue',
+    'visits_per_day' => 'Visits Per Day',
+
 );

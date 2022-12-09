@@ -1049,5 +1049,6 @@ return [
     'funny_days' => 'عدد أيام التسلية',
     'select_trip_type' => 'اختر نوع الرحلة',
     'advanced_options' => 'خيارات متقدمة',
+    'visits_per_day' => 'عدد الزيارات في اليوم',
 
 ];

@@ -403,8 +403,7 @@
     <script>
         $(document).ready(function() {
             @if((session()->get('show_trip') !== 0))
-                $('.popup_that_shows_on_startup #make_a_trip_popup').addClass('hide')
-                $('.popup_that_shows_on_startup #popup_background').addClass('hide')
+                $('.popup_that_shows_on_startup').addClass('hide')
             @else
             makeATripPopupShow()
 
@@ -440,13 +439,14 @@
         /* show hide popup */
         function makeATripPopupShow(){
             setTimeout(() => {
-                $('.popup_that_shows_on_startup #make_a_trip_popup').removeClass('hide')
-                $('.popup_that_shows_on_startup #popup_background').removeClass('hide')
+                $('.popup_that_shows_on_startup').removeClass('hide')
             }, 200);
-            $('.popup_that_shows_on_startup #popup_background').click(function(){
+            $('.popup_that_shows_on_startup').click(function(e){
+                var $target = $(e.target);
+                if(!$target.closest('#make_a_trip_popup').length){
+                    $('.popup_that_shows_on_startup').addClass('hide')
+                }
                 // alert('hi')
-                $('.popup_that_shows_on_startup #make_a_trip_popup').addClass('hide')
-                $('.popup_that_shows_on_startup #popup_background').addClass('hide')
             })
         }
 
@@ -519,6 +519,26 @@
             $('#type').val('register');
             $('#trip_form').submit();
         });
+    </script>
+    <script>
+        /* show hide register and login popup */
+        function openHomeRegisterAndLoginPopup(){
+            setTimeout(() => {
+                $('.home_login_and_register_form_container').removeClass('hide')
+            }, 200);
+            $('.home_login_and_register_form_container').click(function(e){
+                var $target = $(e.target);
+                if(!$target.closest('#home_login_and_register_form').length){
+                    $('.home_login_and_register_form_container').addClass('hide')
+                }
+                // alert('hi')
+            })
+        }
+
+        // toggle register and login pages
+        function toggleLoginAndRegisterPages(){
+            $('#home_login_and_register_form > form').toggleClass('hide')
+        }
     </script>
 </body>
 
