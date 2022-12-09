@@ -35,6 +35,40 @@ class HomeController extends Controller
         return redirect('/ar');
     }
 
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|exists:users,email',
+            'password' => 'required',
+        ]);
+        $user = auth()->attempt($request->only('email', 'password'));
+        return redirect('/ar');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'register_email' => 'required',
+            'register_password' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+        ]);
+
+        $user = User::firstOrCreate([
+            'email' => $request->register_email
+        ], [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->register_email,
+            'photo' => "assets/media/avatars/150-2.jpg",
+            'password' => Hash::make($request->register_password),
+        ]);
+        if ($user) {
+            auth()->login($user);
+        }
+        return redirect('/ar');
+    }
+
     public function action_selected_places(Request $request)
     {
         $request->validate([
@@ -113,7 +147,7 @@ class HomeController extends Controller
 
         if ($request->type == 'register' && $request->first_name && $request->last_name && $request->register_email && $request->register_password) {
             $user = User::firstOrCreate([
-                'email' => $request->email
+                'email' => $request->register_email
             ], [
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,

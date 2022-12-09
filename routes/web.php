@@ -263,6 +263,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         Route::post('action_selected_places', 'HomeController@action_selected_places')->name('action_selected_places');
 
 
+        Route::post('/login', 'HomeController@login')->name('login');
+        Route::post('/register', 'HomeController@register')->name('register');
         Route::get('/logout', 'HomeController@logout')->name('logout')->middleware('auth');
     });
     /*========================= Front Routes ==============================*/

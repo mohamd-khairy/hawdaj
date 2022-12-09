@@ -30,13 +30,14 @@ function makeATripNextTab(tabNum){
 /* show hide popup */
 function makeATripPopupShow(){
     setTimeout(() => {
-        $('.popup_that_shows_on_startup #make_a_trip_popup').removeClass('hide')
-        $('.popup_that_shows_on_startup #popup_background').removeClass('hide')
+        $('.popup_that_shows_on_startup').removeClass('hide')
     }, 200);
-    $('.popup_that_shows_on_startup #popup_background').click(function(){
+    $('.popup_that_shows_on_startup').click(function(e){
+        var $target = $(e.target);
+        if(!$target.closest('#make_a_trip_popup').length){
+            $('.popup_that_shows_on_startup').addClass('hide')
+        }
         // alert('hi')
-        $('.popup_that_shows_on_startup #make_a_trip_popup').addClass('hide')
-        $('.popup_that_shows_on_startup #popup_background').addClass('hide')
     })
 }
 

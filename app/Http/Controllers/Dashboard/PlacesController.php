@@ -145,7 +145,9 @@ class PlacesController extends Controller
             }
 
             if (request('seasons')) {
-                $data['seasons'] = is_array($request->seasons) ? implode(',', __('dashborad.' . $request->seasons)) : null;
+                $data['seasons'] = is_array($request->seasons) ? implode(',', collect($request->seasons)->map(function ($i) {
+                    return __('dashboard.' . $i, [], 'ar');
+                })->toArray()) : null;
             }
 
             if (request('new_key_words', null)) {

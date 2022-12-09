@@ -16,6 +16,58 @@
          <!-- top navbar -->
          @include('layouts.front.partials.nav')
 
+         
+             <div class="additional_bar_login_and_welcome">
+                @if (!auth()->check())
+                 <div class="home_login_buttons_area">
+                     <button class="home_login_button"
+                         onclick="openHomeRegisterAndLoginPopup()">{{ __('dashboard.login') }}</button>
+                 </div>
+                 @else
+                 <div class="home_welcome_text_area" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}">
+                     <span>{{ __('dashboard.welcome') }}</span>
+                     <span>{{ auth()->user()->first_name }}</span>
+                     <span>!</span>
+                 </div>
+                 @endif
+             </div>
+        
+             <div class="home_login_and_register_form_container hide"
+                 dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}">
+                 <div id="home_login_and_register_form">
+                     <form class="login_page" method="post" action="{{ route('front.login') }}">
+                        @csrf
+                         <h5 class="text-center font-weight-bold">{{ __('dashboard.login') }}</h5>
+                         <!-- <h6>{{ __('dashboard.login') }}</h6> -->
+                         <label>{{ __('dashboard.email') }}</label>
+                         <input type="email" name="email" placeholder="" required>
+                         <label>{{ __('dashboard.password') }}</label>
+                         <input type="password" name="password" placeholder="" required>
+                         <button type="submit"  id="login" >{{ __('dashboard.login') }}</button>
+                         <a href="#" onclick="toggleLoginAndRegisterPages()">{{ __('dashboard.register') }}</a>
+                     </form>
+                     <form class="register_page hide" method="post" action="{{ route('front.register') }}">
+                        @csrf
+                         <h5 class="text-center font-weight-bold">{{ __('dashboard.register') }}</h5>
+                         <label>{{ __('dashboard.first_name') }}</label>
+                         <input type="text" name="first_name" placeholder="" required>
+                         <label>{{ __('dashboard.last_name') }}</label>
+                         <input type="text" name="last_name" placeholder="" required>
+                         <label>{{ __('dashboard.email') }}</label>
+                         <input type="email" name="register_email" placeholder="" required>
+                         <label>{{ __('dashboard.password') }}</label>
+                         <input type="password" name="register_password" placeholder="" required>
+                         <button type="submit" id="register">{{ __('dashboard.register') }}</button>
+                         <a href="#" onclick="toggleLoginAndRegisterPages()">{{ __('dashboard.login') }}</a>
+                     </form>
+                     <img class="loader_infinity hide"
+                         src="{{ asset('front_assets/imgs/popup_images/Infinity_loader.gif') }}"
+                         alt="fabulous trip image">
+
+                 </div>
+             </div>
+         
+
          <div class="row header__body align-items-center">
              <div class="col-lg-4 header__body--text d-flex flex-column justify-content-center mb-5 mb-lg-0">
                  <h1 class="slide-up">

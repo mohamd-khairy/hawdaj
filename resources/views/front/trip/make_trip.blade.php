@@ -3,19 +3,28 @@
 <style>
     /* make a trip popup start */
 
-    .popup_that_shows_on_startup #make_a_trip_popup {
-        position: fixed;
+    .popup_that_shows_on_startup{
+        position: absolute;
+        width: 100%;
+        height: 100%;
         top: 0;
-        left: 0;
-        width: 70%;
-        /* height: calc(100% - 100px); */
+        right: 0;
+        z-index: 999;
+        background-color: #000d;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .popup_that_shows_on_startup #make_a_trip_popup{
+        z-index: 999999;
+        display: flex;
+        flex-direction: column;
+        width: 800px;
         background-color: #fff;
-        z-index: 4;
-        margin-top: 50px;
-        margin-left: 15%;
+        padding: 30px;
         border-radius: 10px;
-        box-shadow: 0 0 10px #000;
-        padding: 25px 0 0;
         text-align: center;
         transition: all 0.5s;
         visibility: visible;
@@ -23,10 +32,12 @@
         overflow: hidden;
     }
 
-    .popup_that_shows_on_startup #make_a_trip_popup.hide {
-        transition: all 0.5s;
+    .popup_that_shows_on_startup.hide{
+        /* transition: all 0.5s;
         visibility: hidden;
         opacity: 0;
+        z-index: -999; */
+        display: none;
     }
 
     .popup_that_shows_on_startup #make_a_trip_popup h5 {
@@ -99,23 +110,7 @@
         font-weight: bold;
     }
 
-    .popup_that_shows_on_startup #popup_background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: #000000bd;
-        z-index: 999998;
-    }
-
-    .popup_that_shows_on_startup #popup_background.hide {
-        transition: all 0.5s;
-        visibility: hidden;
-        opacity: 0;
-    }
-
-    .popup_that_shows_on_startup .tab {
+    .popup_that_shows_on_startup .tab{
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -135,6 +130,17 @@
         border: 1px solid #2c085d !important;
         cursor: pointer;
         background-color: hsl(231, 20%, 85%);
+    }
+    
+    .popup_that_shows_on_startup .tab > .left-side > #as_a_guest{
+        border: none !important;
+        background-color: unset;
+        color: #2c085d;
+    }
+    
+    .popup_that_shows_on_startup .tab > .left-side > #as_a_guest:hover{
+        color: #8d839b;
+        text-decoration: underline;
     }
 
     .select2-container {
@@ -191,13 +197,17 @@
         max-height: 75px;
     }
 
-    .popup_that_shows_on_startup .tab>.left-side>button#login,
-    .popup_that_shows_on_startup .tab>.left-side>button#register {
-        border: solid 2px #000;
-        font-weight: bold;
+    .popup_that_shows_on_startup .tab > .left-side > button#login, .popup_that_shows_on_startup .tab > .left-side > button#register{
         border-radius: 50px;
         font-weight: bold;
         margin-top: 10px;
+        background-color: #2c085d;
+        color: #fff;
+    }
+    
+    .popup_that_shows_on_startup .tab > .left-side > button#login:hover, .popup_that_shows_on_startup .tab > .left-side > button#register:hover{
+        background-color: #8d839b;
+        color: #2c085d;
     }
 
     .popup_that_shows_on_startup .tab>.left-side>.navigation_buttons {
@@ -303,8 +313,8 @@
     /* loader start */
     .popup_that_shows_on_startup #make_a_trip_popup .loader_infinity {
         position: absolute;
-        left: 38%;
-        top: 35%;
+        left: 42%;
+        top: 39%;
         width: 150px;
         transition: all 0.2s;
     }
@@ -420,8 +430,8 @@
     /* make a trip popup end */
 </style>
 
-<div class="popup_that_shows_on_startup" dir="ltr">
-    <div id="make_a_trip_popup" class="container  hide" style="z-index: 999999;">
+<div class="popup_that_shows_on_startup hide" dir="ltr">
+    <div id="make_a_trip_popup" class="container" style="z-index: 999999;">
         <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}">
             <h5>{{ __('dashboard.ready_to_make_a_trip') }}</h5>
         </div>
@@ -599,9 +609,6 @@
             </div>
         </form>
     </div>
-
-    <div id="popup_background"></div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
