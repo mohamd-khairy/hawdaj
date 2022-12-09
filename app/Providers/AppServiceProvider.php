@@ -80,6 +80,7 @@ class AppServiceProvider extends ServiceProvider
             // $cities = City::all();
 
             $seasons = [
+                "طوال العام",
                 "موسم الربيع",
                 "موسم الصيف",
                 "موسم الخريف",
@@ -98,7 +99,6 @@ class AppServiceProvider extends ServiceProvider
 
             if ($settings)
                 view()->share(compact('settings', 'key_words', 'categories', 'seasons', 'prices', 'regions'));
-
         } catch (\Exception $e) {
             //
         }

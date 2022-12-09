@@ -412,6 +412,7 @@
                                         <span class="text-danger"> * </span>
                                         <div class="input-group">
                                             <select name="seasons[]" class="form-control select2" id="" multiple>
+                                                <option value="all_year" {{ in_array('all_year' , old('seasons' , []) ?? []) ? 'selected ': '' }}> {{ __('dashboard.all_year') }}</option>
                                                 <option value="spring" {{ in_array('spring' , old('seasons' , []) ?? []) ? 'selected ': '' }}> {{ __('dashboard.spring_season') }}</option>
                                                 <option value="summer" {{ in_array('summer' , old('seasons' , []) ?? []) ? 'selected ': '' }}> {{ __('dashboard.summer_season') }}</option>
                                                 <option value="fall" {{ in_array('fall' , old('seasons' , []) ?? []) ? 'selected ': '' }}> {{ __('dashboard.fall_season') }}</option>

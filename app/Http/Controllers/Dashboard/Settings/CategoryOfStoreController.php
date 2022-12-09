@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Settings\SaveCategoryOfStoreRequest;
 use App\Http\Requests\Dashboard\Settings\UpdateCategoryOfStoreRequest;
 use App\Models\CategoryOfStore as Category;
+use App\Models\CategoryOfStore;
 use App\Services\UploadService;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class CategoryOfStoreController extends Controller
     {
         return view('dashboard.settings.categoriesOfStore.index', [
             'title' => trans('dashboard.categories'),
-            'categories' => Category::all(),
+            'categories' => CategoryOfStore::all(),
         ]);
     }
 
@@ -34,7 +35,7 @@ class CategoryOfStoreController extends Controller
     {
         return view('dashboard.settings.categoriesOfStore.create', [
             'title' => __('dashboard.create_category'),
-            'categories' => Category::allParents(),
+            'categories' => CategoryOfStore::allParents(),
         ]);
     }
 
@@ -52,12 +53,11 @@ class CategoryOfStoreController extends Controller
             if ($request->hasFile('icon')) {
                 $data['icon'] = UploadService::store($request->icon, 'users');
             }
-            Category::create($data);
+            CategoryOfStore::create($data);
 
             return redirect(route('dashboard.store-categories.index'))->with([
                 'message' => trans('dashboard.category_added_successfully'),
             ]);
-
         } catch (Exception $e) {
             return unKnownError($e->getMessage());
         }
@@ -80,12 +80,13 @@ class CategoryOfStoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($category)
     {
+        $category = CategoryOfStore::find($category);
         return view('dashboard.settings.categoriesOfStore.edit', [
             'title' => __('dashboard.edit_category'),
             'category' => $category,
-            'categories' => Category::allParents(),
+            'categories' => CategoryOfStore::allParents(),
 
         ]);
     }
@@ -97,8 +98,9 @@ class CategoryOfStoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UpdateCategoryOfStoreRequest $category)
+    public function update(UpdateCategoryOfStoreRequest $request,  $category)
     {
+        $category = CategoryOfStore::find($category);
         $data = $request->validated();
 
         if ($request->hasFile('icon')) {
@@ -121,7 +123,7 @@ class CategoryOfStoreController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
+        CategoryOfStore::find($id)->delete();
 
         return response()->json([
             'message' => trans('dashboard.category_delete_successfully'),

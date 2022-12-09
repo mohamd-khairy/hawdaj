@@ -191,10 +191,11 @@
                     <span class="text-danger"> * </span>
                     <div class="input-group">
                         <select name="seasons[]" class="form-control select2" id="" multiple>
-                            <option value="spring" {{ in_array('spring',$data->seasons) ? 'selected'  : '' }}>{{ __('dashboard.spring_season') }}</option>
-                            <option value="summer" {{ in_array('summer',$data->seasons) ? 'selected'  : '' }}>{{ __('dashboard.summer_season') }}</option>
-                            <option value="fall" {{ in_array('fall',$data->seasons) ? 'selected'  : '' }}>{{ __('dashboard.fall_season') }}</option>
-                            <option value="winter" {{ in_array('winter',$data->seasons) ? 'selected'  : '' }}>{{ __('dashboard.winter_season') }}</option>
+                            <option value="all_year" {{ in_array(__('dashboard.all_year' , [] , 'ar'), $data->seasons) ? 'selected ': '' }}> {{ __('dashboard.all_year') }}</option>
+                            <option value="spring" {{ in_array(__('dashboard.spring_season' , [] , 'ar'),$data->seasons) ? 'selected'  : '' }}>{{ __('dashboard.spring_season') }}</option>
+                            <option value="summer" {{ in_array(__('dashboard.summer_season' , [] , 'ar'),$data->seasons) ? 'selected'  : '' }}>{{ __('dashboard.summer_season') }}</option>
+                            <option value="fall" {{ in_array(__('dashboard.fall_season' , [] , 'ar'),$data->seasons) ? 'selected'  : '' }}>{{ __('dashboard.fall_season') }}</option>
+                            <option value="winter" {{ in_array(__('dashboard.winter_season' , [] , 'ar'),$data->seasons) ? 'selected'  : '' }}>{{ __('dashboard.winter_season') }}</option>
                         </select>
                         <div class="invalid-feedback">
                             <strong>{{ $errors->has('seasons') ? $errors->first('seasons') : '' }}</strong>

@@ -458,9 +458,6 @@
             // alert('changed')
             if ($(this).val()){
                 $(this).siblings('input[required], select[required]').each(function(index){
-                    // if($(this).attr("class").includes('select2')){
-                    //     // alert('select2 is here!')
-                    // }
                     if ($(this).val()){
                         // alert($(this).val())
                         popup_input_values = true;

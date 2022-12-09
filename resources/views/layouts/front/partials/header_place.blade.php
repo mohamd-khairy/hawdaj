@@ -33,13 +33,13 @@
                      <li class="breadcrumb-item {{ isset($place) ? '' : 'active' }}"><a href="/{{$link ?? 'places'}}">{{$type ?? ''}}</a></li>
                      @if (isset($place))
                      <li class="breadcrumb-item active" aria-current="page">
-                         {{ isset($place) ? substr($place->title, 0, 20) : '' }}
+                         {{ isset($place->title) ? substr($place->title, 0, 20) : '' }}
                      </li>
                      @endif
                  </ol>
              </nav>
 
-             <h1 class="page-title">{{ isset($place) ? substr($place->title, 0, 20) : $type }}</h1>
+             <h1 class="page-title">{{ isset($place->title) ? substr($place->title, 0, 20) : $type }}</h1>
          </div>
          @endif
      </div>

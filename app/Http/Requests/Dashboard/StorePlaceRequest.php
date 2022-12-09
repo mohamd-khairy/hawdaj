@@ -33,7 +33,7 @@ class StorePlaceRequest extends FormRequest
             'region_id' => ['required', Rule::exists('regions', 'id')],
             'city_id' => ['required', Rule::exists('cities', 'id')],
             'price_id' => ['required', Rule::exists('prices', 'id')],
-            'seasons' => ['required', 'array', Rule::in('spring', 'summer', 'winter', 'fall')],
+            'seasons' => ['required', 'array', Rule::in('spring', 'summer', 'winter', 'fall' , 'all_year')],
             'address_type' => ['required', Rule::in('link', 'map', 'latlong')],
         ];
     }

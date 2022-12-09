@@ -48,6 +48,7 @@ class PlacesController extends Controller
         $places = $places->latest()->paginate(10);
 
         $seasons = [
+            "طوال السنة",
             "موسم الربيع",
             "موسم الصيف",
             "موسم الخريف",
@@ -144,15 +145,15 @@ class PlacesController extends Controller
             }
 
             if (request('seasons')) {
-                $data['seasons'] = is_array($request->seasons) ? implode(',', $request->seasons) : null;
+                $data['seasons'] = is_array($request->seasons) ? implode(',', __('dashborad.' . $request->seasons)) : null;
             }
 
-            if (request('new_key_words' , null)) {
+            if (request('new_key_words', null)) {
 
-                foreach (request('new_key_words' , []) as $key => $value) {
+                foreach (request('new_key_words', []) as $key => $value) {
                     $new[] = $value['new_key_words'];
                 }
-                $data['key_words'] = array_merge(request('key_words' , []), $new);
+                $data['key_words'] = array_merge(request('key_words', []), $new);
                 unset($data['new_key_words']);
             }
 
@@ -290,7 +291,9 @@ class PlacesController extends Controller
             }
 
             if (request('seasons')) {
-                $data['seasons'] = is_array($request->seasons) ? implode(',', $request->seasons) : null;
+                $data['seasons'] = is_array($request->seasons) ? implode(',', collect($request->seasons)->map(function ($i) {
+                    return __('dashboard.' . $i, [], 'ar');
+                })->toArray()) : null;
             }
 
             if (request()->hasFile('image')) {
