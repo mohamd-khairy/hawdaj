@@ -422,161 +422,179 @@
 </style>
 
 <div class="popup_that_shows_on_startup hide" dir="ltr">
-
     <div id="make_a_trip_popup" class="container" style="z-index: 999999;">
-        <div dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}">
-            <h5>{{__('dashboard.ready_to_make_a_trip')}}</h5>
+        <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}">
+            <h5>{{ __('dashboard.ready_to_make_a_trip') }}</h5>
         </div>
         <form action="{{ route('front.action_selected_places') }}" method="POST" id="trip_form">
             <input type="hidden" name="type" id="type" value="guest">
             @csrf
-            <img class="loader_infinity hide" src="{{ asset('front_assets/imgs/popup_images/Infinity_loader.gif') }}" alt="fabulous trip image">
+            <img class="loader_infinity hide" src="{{ asset('front_assets/imgs/popup_images/Infinity_loader.gif') }}"
+                alt="fabulous trip image">
             <div class="tabs row">
-                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="main_tab col-12">
+                <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}" class="main_tab col-12">
                     <div class="left-side">
                         <p class="description">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo qui incidunt, quam id architecto, repellat vel fuga placeat distinctio quia magni praesentium reiciendis aspernatur eveniet iure? Omnis dicta eligendi tempore.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo qui incidunt, quam id
+                            architecto, repellat vel fuga placeat distinctio quia magni praesentium reiciendis
+                            aspernatur eveniet iure? Omnis dicta eligendi tempore.
                         </p>
-                        <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(1)">{{__('dashboard.make_a_trip')}}</button>
-                        </div>
+                        <button type="button" class="make_a_trip_button"
+                            onclick="makeATripNextTab(1)">{{ __('dashboard.make_a_trip') }}</button>
+                    </div>
                     <div class="right-side">
                         <img src="{{ asset('front_assets/imgs/popup_images/trip_5.jpg') }}" alt="fabulous trip image">
                     </div>
                 </div>
-                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
+
+                <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}" class="tab hide col-12">
                     <div class="left-side">
-                        <label for="date">{{__('dashboard.select_date')}}</label>
-                        <!-- <input type="text" id="date" placeholder="xx/xx/xxxx"> -->
+                        <label for="date">{{ __('dashboard.select_date') }}</label>
                         <div class="timetable_container hide">
                             <div id="calendar" class="calendar">
-                            <span>Add something here</span>
+                                <span>Add something here</span>
                             </div>
                         </div>
-                        <input type="date" placeholder="" id="date" onclick="openCalendar()" required>
-                        <label for="region_id">{{__('dashboard.select_region')}}</label>
-                        <select class="select2" name="region_id" id="region_id"  required>
-                            <!-- <option value="">{{ __('dashboard.select_region') }}</option> -->
-                            @foreach($regions as $region)
-                            <option value="{{ $region->id }}" {{ old('region_id') == $region->id ? 'selected ': '' }}>{{ $region->name ?? '---' }}</option>
+                        <input type="date" name="date" placeholder="" id="date" onclick="openCalendar()"
+                            required>
+
+                        <label for="region_id">{{ __('dashboard.select_region') }}</label>
+                        <select class="select2" name="region_id" id="region_id" required>
+                            <option value="">{{ __('dashboard.select_region') }}</option>
+                            @foreach ($regions as $region)
+                                <option value="{{ $region->id }}"
+                                    {{ old('region_id') == $region->id ? 'selected ' : '' }}>
+                                    {{ $region->name ?? '---' }}</option>
                             @endforeach
                         </select>
-                        <label for="city_id">{{__('dashboard.select_city')}}</label>
+
+                        <label for="city_id">{{ __('dashboard.select_city') }}</label>
                         <select class="select2" name="city_id" id="city_id">
                             <option value="">{{ __('dashboard.select_city') }}</option>
                         </select>
                         <div class="navigation_buttons">
-                            <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(0)">{{__('dashboard.back')}}</button>
-                            <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(2)" disabled>{{__('dashboard.next')}}</button>
+                            <button type="button" class="make_a_trip_button"
+                                onclick="makeATripNextTab(0)">{{ __('dashboard.back') }}</button>
+                            <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(2)"
+                                disabled>{{ __('dashboard.next') }}</button>
                         </div>
                     </div>
                     <div class="right-side">
                         <img src="{{ asset('front_assets/imgs/popup_images/trip_4.jpg') }}" alt="fabulous trip image">
                     </div>
                 </div>
-                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
+                <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}" class="tab hide col-12">
                     <div class="left-side">
-                        <!-- <h6>{{__('dashboard.specify_trip')}}</h6> -->
-                        <label for="season">{{__('dashboard.select_season')}}</label>
-                        <select class="select2" name="season" id="season" required>
-                            @foreach($seasons as $item)
-                            <option value="{{$item}}">{{$item}}</option>
-                            @endforeach
-                        </select>
-                        <label for="price">{{__('dashboard.select_price')}}</label>
+
+                        <label for="price">{{ __('dashboard.select_price') }}</label>
                         <select class="select2" name="price" id="price" required>
-                            @foreach($prices as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            @foreach ($prices as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
-                        <label for="days">{{__('dashboard.days')}}</label>
+
+                        <label for="days">{{ __('dashboard.days') }}</label>
                         <input type="number" name="days" placeholder="" id="days" required>
-                        <label for="funny_days">{{__('dashboard.visits_per_day')}}</label>
-                        <input type="number" name="funny_days" placeholder="" id="funny_days" required>
+
+                        <label for="funny_place_per_day">{{ __('dashboard.funny_place_per_day') }}</label>
+                        <input type="number" name="funny_place_per_day" placeholder="" id="funny_place_per_day" required>
+
                         <div class="navigation_buttons">
-                            <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(1)">{{__('dashboard.back')}}</button>
-                            <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(3)" disabled>{{__('dashboard.next')}}</button>
+                            <button type="button" class="make_a_trip_button"
+                                onclick="makeATripNextTab(1)">{{ __('dashboard.back') }}</button>
+                            <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(3)"
+                                disabled>{{ __('dashboard.next') }}</button>
                         </div>
                     </div>
                     <div class="right-side">
                         <img src="{{ asset('front_assets/imgs/popup_images/trip-3.jpg') }}" alt="fabulous trip image">
                     </div>
                 </div>
-                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
+                <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}" class="tab hide col-12">
                     <div class="left-side">
-                        <!-- <h6>{{__('dashboard.select_many')}}</h6> -->
-                        <label for="key_words">{{__('dashboard.select_trip_type')}}</label>
-                        <select class="select2" style="height: 150px;" name="key_words[]" id="example-getting-started" multiple>
-                            @foreach($key_words as $item)
-                            <option value="{{$item}}">{{$item}}</option>
-                            @endforeach
-                        </select>
+                        @if ($key_words && count($key_words) > 0)
+                            <label for="key_words">{{ __('dashboard.select_trip_type') }}</label>
+                            <select class="select2" style="height: 150px;" name="key_words[]"
+                                id="example-getting-started" multiple>
+                                @foreach ($key_words as $item)
+                                    <option value="{{ $item }}">{{ $item }}</option>
+                                @endforeach
+                            </select>
+                        @endif
 
-                        <!-- <h6>{{__('dashboard.select_many')}}</h6> -->
-                        <label for="categories">{{__('dashboard.advanced_options')}}</label>
-                        <select class="select2" style="height: 150px;" name="categories[]" id="categories" multiple>
-                            @foreach($categories as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
-                            @endforeach
-                        </select>
-
-                        <div class="navigation_buttons">
-                            <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(2)">{{__('dashboard.back')}}</button>
-                            <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(4)">{{__('dashboard.next')}}</button>
-                        </div>
-                    </div>
-                    <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/trip_2.jpg') }}" alt="fabulous trip image">
-                    </div>
-                </div>
-                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab col-12">
-                    <div class="left-side">
-                        @if(!auth()->check())
-
-                    
-                        <!-- <h6>{{__('dashboard.login')}}</h6> -->
-                        <label>{{__('dashboard.email')}}</label>
-                        <input type="email" name="email" placeholder="" required>
-                        <label>{{__('dashboard.password')}}</label>
-                        <input type="password" name="password" placeholder="" required>
-                        <button type="button" id="login" disabled>{{__('dashboard.login')}}</button>
-                        <button type="submit" id="as_a_guest" class="">{{__('dashboard.continueAsAguest')}}</button>
-
-                        <a href="#" onclick="makeATripNextTab(5)">{{__('dashboard.register')}}</a>
-                        @else
-                        <button type="submit" class="">{{__('dashboard.continue')}}</button>
+                        @if ($categories && count($categories) > 0)
+                            <label for="categories">{{ __('dashboard.advanced_options') }}</label>
+                            <select class="select2" style="height: 150px;" name="categories[]" id="categories"
+                                multiple>
+                                @foreach ($categories as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         @endif
 
                         <div class="navigation_buttons">
-                            <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(3)">{{__('dashboard.back')}}</button>
+                            <button type="button" class="make_a_trip_button"
+                                onclick="makeATripNextTab(2)">{{ __('dashboard.back') }}</button>
+                            <button type="button" class="make_a_trip_button next"
+                                onclick="makeATripNextTab(4)">{{ __('dashboard.next') }}</button>
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/trip_1.jpg') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/trip_2.jpg') }}"
+                            alt="fabulous trip image">
                     </div>
                 </div>
-
-                @if(!auth()->check())
-                <div  dir="{{(app()->getLocale() === 'en') ? 'ltr' : 'rtl'}}" class="tab hide col-12 registerPage">
+                <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}" class="tab hide col-12">
                     <div class="left-side">
-                        <!-- <h6>{{__('dashboard.register')}}</h6> -->
-                        <label>{{__('dashboard.first_name')}}</label>
-                        <input type="text" name="first_name" placeholder="" required>
-                        <label>{{__('dashboard.last_name')}}</label>
-                        <input type="text" name="last_name" placeholder="" required>
-                        <label>{{__('dashboard.email')}}</label>
-                        <input type="email" name="register_email" placeholder="" required>
-                        <label>{{__('dashboard.password')}}</label>
-                        <input type="password" name="register_password" placeholder="" required>
-                        <button type="button" id="register" disabled>{{__('dashboard.register')}}</button>
+                        @if (!auth()->check())
+                            <label>{{ __('dashboard.email') }}</label>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <label>{{ __('dashboard.password') }}</label>
+                            <input type="password" name="password" placeholder="Password" required>
+                            <button type="button" id="login" disabled>{{ __('dashboard.login') }}</button>
+                            <button type="submit" id="as_a_guest"
+                                class="">{{ __('dashboard.continueAsAguest') }}</button>
+
+                            <a href="#" onclick="makeATripNextTab(5)">{{ __('dashboard.register') }}</a>
+                        @else
+                            <button type="submit" class="">{{ __('dashboard.continue') }}</button>
+                        @endif
 
                         <div class="navigation_buttons">
-                            <button type="button" class="make_a_trip_button" onclick="makeATripNextTab(4)">{{__('dashboard.back')}}</button>
+                            <button type="button" class="make_a_trip_button"
+                                onclick="makeATripNextTab(3)">{{ __('dashboard.back') }}</button>
                         </div>
                     </div>
                     <div class="right-side">
-                        <img src="{{ asset('front_assets/imgs/popup_images/trip_5.jpg') }}" alt="fabulous trip image">
+                        <img src="{{ asset('front_assets/imgs/popup_images/trip_1.jpg') }}"
+                            alt="fabulous trip image">
                     </div>
                 </div>
+
+                @if (!auth()->check())
+                    <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}" class="tab hide col-12 registerPage">
+                        <div class="left-side">
+                            <label>{{ __('dashboard.first_name') }}</label>
+                            <input type="text" name="first_name" placeholder="" required>
+                            <label>{{ __('dashboard.last_name') }}</label>
+                            <input type="text" name="last_name" placeholder="" required>
+                            <label>{{ __('dashboard.email') }}</label>
+                            <input type="email" name="register_email" placeholder="" required>
+                            <label>{{ __('dashboard.password') }}</label>
+                            <input type="password" name="register_password" placeholder="" required>
+                            <button type="button" id="register" disabled>{{ __('dashboard.register') }}</button>
+
+                            <div class="navigation_buttons">
+                                <button type="button" class="make_a_trip_button"
+                                    onclick="makeATripNextTab(4)">{{ __('dashboard.back') }}</button>
+                            </div>
+
+                        </div>
+                        <div class="right-side">
+                            <img src="{{ asset('front_assets/imgs/popup_images/trip_5.jpg') }}"
+                                alt="fabulous trip image">
+                        </div>
+                    </div>
                 @endif
 
             </div>
@@ -607,34 +625,37 @@
 
     renderDOM(selectedYear, selectedMonth);
 
-    function getMonthName (year, month) {
-        let selectedDate = new Date(year, month-1, 1);
-        return selectedDate.toLocaleString('default', { month: 'long' });
+    function getMonthName(year, month) {
+        let selectedDate = new Date(year, month - 1, 1);
+        return selectedDate.toLocaleString('default', {
+            month: 'long'
+        });
     }
 
-    function getMonthText () {
+    function getMonthText() {
         // if (selectedYear === currYear)
         //     return selectedMonthName;
         // else
-            return selectedMonthName + ", " + selectedYear;
+        return selectedMonthName + ", " + selectedYear;
     }
 
-    function getDayName (year, month, day) {
-        let selectedDate = new Date(year, month-1, day);
-        return selectedDate.toLocaleDateString('en-US',{weekday: 'long'});
+    function getDayName(year, month, day) {
+        let selectedDate = new Date(year, month - 1, day);
+        return selectedDate.toLocaleDateString('en-US', {
+            weekday: 'long'
+        });
     }
 
-    function getDayCount (year, month) {
-        return 32 - new Date(year, month-1, 32).getDate();
+    function getDayCount(year, month) {
+        return 32 - new Date(year, month - 1, 32).getDate();
     }
 
-    function getDaysArray () {
+    function getDaysArray() {
         let emptyFieldsCount = 0;
         let emptyFields = [];
         let days = [];
 
-        switch(getDayName(selectedYear, selectedMonth, 1))
-        {
+        switch (getDayName(selectedYear, selectedMonth, 1)) {
             case "Tuesday":
                 emptyFieldsCount = 1;
                 break;
@@ -654,65 +675,65 @@
                 emptyFieldsCount = 6;
                 break;
         }
-    
+
         emptyFields = Array(emptyFieldsCount).fill("");
         days = Array.from(Array(selectedMonthDays + 1).keys());
         days.splice(0, 1);
-        
+
         return emptyFields.concat(days);
     }
 
-    function renderDOM (year, month) {
-    let newCalendarNode = document.createElement("div");
-    newCalendarNode.id = "calendar";
-    newCalendarNode.className = "calendar";
-    
-    let dateText = document.createElement("div");
-    dateText.append(getMonthText());
-    dateText.className = "date-text";
-    newCalendarNode.append(dateText);
-    
-    let leftArrow = document.createElement("div");
-    leftArrow.append("«");
-    leftArrow.className = "button";
-    leftArrow.addEventListener("click", goToPrevMonth);
-    newCalendarNode.append(leftArrow);
-    
-    let curr = document.createElement("div");
-    curr.append("📅");
-    curr.className = "button";
-    curr.addEventListener("click", goToCurrDate);
-    newCalendarNode.append(curr);
-    
-    let rightArrow = document.createElement("div");
-    rightArrow.append("»");
-    rightArrow.className = "button";
-    rightArrow.addEventListener("click", goToNextMonth);
-    newCalendarNode.append(rightArrow);
-    
-    let dayNames = ["M", "T", "W", "T", "F", "S", "S"];
-    
-    dayNames.forEach((cellText) => {
-        let cellNode = document.createElement("div");
-        cellNode.className = "cell cell--unselectable";
-        cellNode.append(cellText);
-        newCalendarNode.append(cellNode);
-    });
-    
-    let days = getDaysArray(year, month);
-    
-    days.forEach((cellText) => {
-        let cellNode = document.createElement("div");
-        cellNode.className = "cell";
-        cellNode.append(cellText);
-        newCalendarNode.append(cellNode);
-    });
-    
-    calendarNode.replaceWith(newCalendarNode);
-    calendarNode = document.querySelector("#calendar");
+    function renderDOM(year, month) {
+        let newCalendarNode = document.createElement("div");
+        newCalendarNode.id = "calendar";
+        newCalendarNode.className = "calendar";
+
+        let dateText = document.createElement("div");
+        dateText.append(getMonthText());
+        dateText.className = "date-text";
+        newCalendarNode.append(dateText);
+
+        let leftArrow = document.createElement("div");
+        leftArrow.append("«");
+        leftArrow.className = "button";
+        leftArrow.addEventListener("click", goToPrevMonth);
+        newCalendarNode.append(leftArrow);
+
+        let curr = document.createElement("div");
+        curr.append("📅");
+        curr.className = "button";
+        curr.addEventListener("click", goToCurrDate);
+        newCalendarNode.append(curr);
+
+        let rightArrow = document.createElement("div");
+        rightArrow.append("»");
+        rightArrow.className = "button";
+        rightArrow.addEventListener("click", goToNextMonth);
+        newCalendarNode.append(rightArrow);
+
+        let dayNames = ["M", "T", "W", "T", "F", "S", "S"];
+
+        dayNames.forEach((cellText) => {
+            let cellNode = document.createElement("div");
+            cellNode.className = "cell cell--unselectable";
+            cellNode.append(cellText);
+            newCalendarNode.append(cellNode);
+        });
+
+        let days = getDaysArray(year, month);
+
+        days.forEach((cellText) => {
+            let cellNode = document.createElement("div");
+            cellNode.className = "cell";
+            cellNode.append(cellText);
+            newCalendarNode.append(cellNode);
+        });
+
+        calendarNode.replaceWith(newCalendarNode);
+        calendarNode = document.querySelector("#calendar");
     }
 
-    function goToPrevMonth () {
+    function goToPrevMonth() {
         selectedMonth--;
         if (selectedMonth === 0) {
             selectedMonth = 12;
@@ -720,11 +741,11 @@
         }
         selectedMonthDays = getDayCount(selectedYear, selectedMonth);
         selectedMonthName = getMonthName(selectedYear, selectedMonth);
-    
+
         renderDOM(selectedYear, selectedMonth);
     }
 
-    function goToNextMonth () {
+    function goToNextMonth() {
         selectedMonth++;
         if (selectedMonth === 13) {
             selectedMonth = 1;
@@ -732,63 +753,64 @@
         }
         selectedMonthDays = getDayCount(selectedYear, selectedMonth);
         selectedMonthName = getMonthName(selectedYear, selectedMonth);
-    
+
         renderDOM(selectedYear, selectedMonth);
     }
 
-    function goToCurrDate () {
+    function goToCurrDate() {
         selectedYear = currYear;
         selectedMonth = currMonth;
 
         selectedMonthDays = getDayCount(selectedYear, selectedMonth);
         selectedMonthName = getMonthName(selectedYear, selectedMonth);
-    
+
         renderDOM(selectedYear, selectedMonth);
     }
 
     // open calendar function
-    function openCalendar(){
+    function openCalendar() {
         $('.timetable_container.hide').removeClass('hide')
     }
     // function to pick date from calendar
-    $('.timetable_container').click(function(e){
-        if(e.target.className == 'cell'){
+    $('.timetable_container').click(function(e) {
+        if (e.target.className == 'cell') {
             selectedDay = parseInt(e.target.textContent)
-            if((selectedDay+'').length == 1){selectedDay = '0' + selectedDay}
-            if((selectedMonth+'').length == 1){selectedMonth = '0' + selectedMonth}
+            if ((selectedDay + '').length == 1) {
+                selectedDay = '0' + selectedDay
+            }
+            if ((selectedMonth + '').length == 1) {
+                selectedMonth = '0' + selectedMonth
+            }
             var selectedDateByUser = (selectedYear + '-' + selectedMonth + '-' + selectedDay)
             // alert(selectedDateByUser)
             $('input#date').val(selectedDateByUser)
             $('.timetable_container').addClass('hide')
-            $('.timetable_container').siblings('div.navigation_buttons').children('button.next').prop('disabled', false);
+            $('.timetable_container').siblings('div.navigation_buttons').children('button.next').prop(
+                'disabled', false);
         }
     })
 
-    $(document).mouseup(function (e) {
-    if ($(e.target).closest(".timetable_container").length
-    === 0) {
-    // $(".container").hide();
-    // alert('outside')
-    $('.timetable_container').addClass('hide')
-    }
+    $(document).mouseup(function(e) {
+        if ($(e.target).closest(".timetable_container").length ===
+            0) {
+            // $(".container").hide();
+            // alert('outside')
+            $('.timetable_container').addClass('hide')
+        }
     })
 </script>
 <script>
     // required star function
     var iii = 0
-    $(document).ready(()=>{
-        $('.left-side').each(function(){
-            $(this).children('input, select').each(function(){
-            console.log($(this).attr('name'))
-            if($(this).is('[required]')){
-            }else{
-                console.log('found one')
-                $(this).prev('label').addClass('not_required')
-            }
+    $(document).ready(() => {
+        $('.left-side').each(function() {
+            $(this).children('input, select').each(function() {
+                console.log($(this).attr('name'))
+                if ($(this).is('[required]')) {} else {
+                    console.log('found one')
+                    $(this).prev('label').addClass('not_required')
+                }
+            })
         })
-        }
-        )
     })
-    
-
 </script>

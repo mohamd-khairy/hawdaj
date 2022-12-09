@@ -35,22 +35,67 @@ class HomeController extends Controller
         return redirect('/ar');
     }
 
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|exists:users,email',
+            'password' => 'required',
+        ]);
+        $user = auth()->attempt($request->only('email', 'password'));
+        return redirect('/ar');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'register_email' => 'required',
+            'register_password' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+        ]);
+
+        $user = User::firstOrCreate([
+            'email' => $request->register_email
+        ], [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->register_email,
+            'photo' => "assets/media/avatars/150-2.jpg",
+            'password' => Hash::make($request->register_password),
+        ]);
+        if ($user) {
+            auth()->login($user);
+        }
+        return redirect('/ar');
+    }
+
     public function action_selected_places(Request $request)
     {
         $request->validate([
             'date' => 'required',
             'days' => 'required',
-            'funny_days' => 'required'
+            'funny_place_per_day' => 'required'
         ]);
         // return $request->all();
-        $places = Place::query(); //->take(10);
+        $places = Place::inRandomOrder(); //->take(10);
 
         if (request('price')) {
             $places = $places->where('price_id', request('price'));
         }
 
-        if (request('season')) {
-            $places = $places->where('seasons', 'like', '%' . request('season') . '%');
+        $month = (int)date('m', strtotime($request->date));
+        if ($month >= 3 && $month <= 5) {
+            $season = 'موسم الربيع';
+            $places = $places->where('seasons', 'like', '%' . $season . '%');
+        } elseif ($month >= 6 && $month <= 8) {
+            $season = 'موسم الصيف';
+            $places = $places->where('seasons', 'like', '%' . $season . '%');
+        } elseif ($month >= 9 && $month <= 11) {
+            $season = 'موسم الخريف';
+            $places = $places->where('seasons', 'like', '%' . $season . '%');
+        } elseif ($month >= 12 || $month <= 2) {
+            $season = 'موسم الشتاء';
+            $places = $places->where('seasons', 'like', '%' . $season . '%');
         }
 
         $places = $places->when($request->region_id, function ($qq) use ($request) {
@@ -77,12 +122,22 @@ class HomeController extends Controller
             });
         }
 
-        $places = $places->get();
+        $places = $places->get(); //->take(request('funny_place_per_day') * request('days'))
+
+        $need_count = request('funny_place_per_day') * request('days');
+
+        if ($places->count() > $need_count) {
+            $places = $places->take($need_count);
+        } else {
+            $need = $need_count - $places->count();
+            $new_places = Place::inRandomOrder()->where('seasons', 'like', '%' . $season . '%')->take($need)->get();
+            $places = array_merge($places->toArray(), $new_places->toArray());
+        }
 
         $data = [];
         $i = 0;
         foreach ($places as $key => $value) {
-            if (count($data[$i] ?? []) < ceil(count($places) / request('funny_days'))) {
+            if (count($data[$i] ?? []) < request('funny_place_per_day')) {
                 $data[$i][] = $value;
             } else {
                 $i = $i + 1;
@@ -92,7 +147,7 @@ class HomeController extends Controller
 
         if ($request->type == 'register' && $request->first_name && $request->last_name && $request->register_email && $request->register_password) {
             $user = User::firstOrCreate([
-                'email' => $request->email
+                'email' => $request->register_email
             ], [
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,

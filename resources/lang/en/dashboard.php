@@ -1304,7 +1304,11 @@ return array(
     'summer_season' => 'summer',
     'fall_season' => 'fall',
     'winter_season' => 'winter',
-
+    'all_year' => 'All Year',
+    'spring' => 'spring',
+    'summer' => 'summer',
+    'fall' => 'fall',
+    'winter' => 'winter',
 
     'zad_elgadels' => 'Zad ElGadel',
     'new_zad_elgadels' => 'New Zad ElGadel',
@@ -1314,7 +1318,6 @@ return array(
     'ready_to_make_a_trip' => 'Ready to make a fabulous trip?!',
     'make_a_trip' => 'Make A Trip',
     'continueAsAguest' => 'Continue As Aguest',
-
     'continue' => 'Continue',
 
     'select_season' => 'Select Season',
@@ -1322,7 +1325,5 @@ return array(
     'funny_days' => 'Funny Days Number',
     'select_trip_type' => 'Select Trip Type',
     'advanced_options' => 'Advanced Options',
-    'continue' => 'Continue',
-    'visits_per_day' => 'Visits Per Day',
-
+    'funny_place_per_day' => 'Count Place Per Day',
 );
