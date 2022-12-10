@@ -40,29 +40,28 @@
         display: none;
     }
 
-    .popup_that_shows_on_startup #make_a_trip_popup h5 {
+    .popup_that_shows_on_startup #make_a_trip_popup h5{
         margin-bottom: 20px;
         font-weight: bold;
         width: 60%;
     }
 
-    .popup_that_shows_on_startup #make_a_trip_popup .tabs {
+    .popup_that_shows_on_startup #make_a_trip_popup .tabs{
         flex-wrap: nowrap;
     }
 
-    .popup_that_shows_on_startup #make_a_trip_popup .main_tab,
-    .popup_that_shows_on_startup #make_a_trip_popup .tab {
+    .popup_that_shows_on_startup #make_a_trip_popup .main_tab, .popup_that_shows_on_startup #make_a_trip_popup .tab{
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
     }
 
-    .popup_that_shows_on_startup #make_a_trip_popup .main_tab>.left-side>p.description {
+    .popup_that_shows_on_startup #make_a_trip_popup .main_tab > .left-side > p.description{
         width: 75%;
         margin: 20px auto;
     }
 
-    .popup_that_shows_on_startup #make_a_trip_popup .main_tab>.left-side>button.make_a_trip_button {
+    .popup_that_shows_on_startup #make_a_trip_popup .main_tab > .left-side > button.make_a_trip_button{
         border-radius: 50px;
         padding: 10px 20px;
         font-weight: bold;
@@ -74,20 +73,20 @@
         border-color: #2c085d;
     }
 
-    .popup_that_shows_on_startup .tabs .left-side {
+    .popup_that_shows_on_startup .tabs .left-side{
         padding-bottom: 25px;
         width: 60%;
         display: flex;
         flex-direction: column;
         margin: auto;
     }
-
-    .popup_that_shows_on_startup .tabs .right-side {
+    
+    .popup_that_shows_on_startup .tabs .right-side{
         width: 40%;
         text-align: start;
     }
-
-    .popup_that_shows_on_startup .tabs .right-side img {
+    
+    .popup_that_shows_on_startup .tabs .right-side img{
         width: 85%;
         object-fit: cover;
         height: 350px;
@@ -95,14 +94,14 @@
         border-radius: 50px;
     }
 
-    .popup_that_shows_on_startup #make_a_trip_popup .main_tab>.left-side>button.make_a_trip_button:hover:not([disabled]),
+    .popup_that_shows_on_startup #make_a_trip_popup .main_tab > .left-side > button.make_a_trip_button:hover:not([disabled]),
     .popup_that_shows_on_startup #make_a_trip_popup .tab button.make_a_trip_button:hover:not([disabled]),
-    .popup_that_shows_on_startup .tab>.left-side>button:hover:not([disabled]) {
+    .popup_that_shows_on_startup .tab > .left-side > button:hover:not([disabled]){
         background-color: #2c085d;
         color: #fff;
     }
 
-    .popup_that_shows_on_startup #make_a_trip_popup .tab button.make_a_trip_button {
+    .popup_that_shows_on_startup #make_a_trip_popup .tab button.make_a_trip_button{
         border: solid 2px #000;
         font-weight: bold;
         width: 100px;
@@ -116,12 +115,11 @@
         width: 100%;
     }
 
-    .popup_that_shows_on_startup .tab.registerPage.hide {
+    .popup_that_shows_on_startup .tab.registerPage.hide{
         display: none !important;
     }
 
-    .popup_that_shows_on_startup .tab>.left-side>*:not(h6):not(.trip_categories):not(a):not(.navigation_buttons):not(label):not(.timetable_container),
-    #make_a_trip_popup .tab .trip_categories>span {
+    .popup_that_shows_on_startup .tab > .left-side > *:not(h6):not(.trip_categories):not(a):not(.navigation_buttons):not(label):not(.timetable_container), #make_a_trip_popup .tab .trip_categories > span{
         width: 70% !important;
         margin: 0 auto 20px;
         height: 40px !important;
@@ -143,11 +141,11 @@
         text-decoration: underline;
     }
 
-    .select2-container {
+    .select2-container{
         z-index: 999999;
     }
 
-    .popup_that_shows_on_startup .tab>.left-side>.select2.select2-container.select2-container--default.select2-container--below {
+    .popup_that_shows_on_startup .tab > .left-side > .select2.select2-container.select2-container--default.select2-container--below{
         height: fit-content !important;
     }
 
@@ -156,44 +154,43 @@
         color: #fff;
     } */
 
-    input::-webkit-calendar-picker-indicator {
+    input::-webkit-calendar-picker-indicator{
         display: none;
     }
 
-    ::-webkit-calendar-picker-indicator {
+    ::-webkit-calendar-picker-indicator{
         color: #fff;
         background-color: #fff;
         border-radius: 5px
     }
 
-    ::-webkit-inner-spin-button {
+    ::-webkit-inner-spin-button{
         cursor: pointer;
     }
 
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
+    .select2-container--default .select2-selection--single .select2-selection__arrow{
         height: 100%;
         width: 30px;
     }
 
-    .popup_that_shows_on_startup .tab>.left-side>label::after {
+    .popup_that_shows_on_startup .tab > .left-side > label::after{
         content: '*';
         color: red;
         font-size: 20px;
         margin: 0 10px;
     }
-
-    .popup_that_shows_on_startup .tab>.left-side>label.not_required::after {
+    
+    .popup_that_shows_on_startup .tab > .left-side > label.not_required::after{
         content: '' !important;
     }
 
-    .popup_that_shows_on_startup .tab>.left-side>label {
+    .popup_that_shows_on_startup .tab > .left-side > label{
         margin: 5px auto 0;
         width: 70%;
         text-align: start;
     }
 
-    .popup_that_shows_on_startup .tab>.left-side>select#categories,
-    .popup_that_shows_on_startup .tab>.left-side>select#key_words {
+    .popup_that_shows_on_startup .tab > .left-side > select#categories, .popup_that_shows_on_startup .tab > .left-side > select#key_words{
         max-height: 75px;
     }
 
@@ -210,7 +207,7 @@
         color: #2c085d;
     }
 
-    .popup_that_shows_on_startup .tab>.left-side>.navigation_buttons {
+    .popup_that_shows_on_startup .tab > .left-side > .navigation_buttons{
         width: 70%;
         margin: 10px auto 0;
         height: 40px;
@@ -218,74 +215,73 @@
         justify-content: space-evenly;
     }
 
-    #make_a_trip_popup .tab .trip_categories {
+    #make_a_trip_popup .tab .trip_categories{
         padding: 0 10px;
     }
 
-    #make_a_trip_popup .tab .trip_categories>span {
+    #make_a_trip_popup .tab .trip_categories > span{
         width: fit-content;
         display: inline-block;
         margin: 10px;
     }
 
-    #make_a_trip_popup .tab .trip_categories>span.active {
+    #make_a_trip_popup .tab .trip_categories > span.active{
         border-color: #2c085d;
         background-color: #2c085d;
         color: #fff;
         transition: all 0.2s;
     }
 
-    .popup_that_shows_on_startup .tab>.left-side>input {
+    .popup_that_shows_on_startup .tab > .left-side > input{
         cursor: auto !important;
     }
-
-    .popup_that_shows_on_startup .tab>.left-side>input#date {
+    
+    .popup_that_shows_on_startup .tab > .left-side > input#date{
         cursor: pointer !important;
     }
 
     /* select2 lib start */
-    .select2-container--default .select2-selection--single,
-    .select2-selection {
+    .select2-container--default .select2-selection--single, .select2-selection{
         background-color: #d1d3e0 !important;
         border: none !important;
     }
 
-    .select2-search--inline {
+    .select2-search--inline{
         display: inline;
     }
 
     .select2-container--default .select2-search--dropdown .select2-search__field,
-    .select2-dropdown.select2-dropdown--above {
+    .select2-dropdown.select2-dropdown--above{
         border: 1px solid #2c085d;
         border-radius: 10px;
     }
 
     .select2-container--open .select2-dropdown--below,
-    .select2-dropdown.select2-dropdown--above {
+    .select2-dropdown.select2-dropdown--above{
         z-index: 9999999;
         background-color: #d1d3e0;
         border-radius: 10px;
         border: solid 1px #2c085d;
     }
 
-    .select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow {
+    .select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow{
         left: 15px;
         right: auto;
         top: 5px;
     }
 
-    .popup_that_shows_on_startup .tab>.left-side>.select2 {
+    .popup_that_shows_on_startup .tab > .left-side > .select2{
         border: none !important;
         padding: 0 !important;
         height: fit-content !important;
     }
 
-    .select2-container .select2-selection--single .select2-selection__rendered {
+    .select2-container .select2-selection--single .select2-selection__rendered{
         text-align: start;
         background-color: hsl(231, 20%, 85%);
     }
 
-    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    .select2-container--default .select2-selection--multiple .select2-selection__choice{
         padding-right: 5px;
         background-color: #2c085d;
         color: #fff;
@@ -293,25 +289,24 @@
         margin-top: 2px;
     }
 
-    .select2-results__option {
+    .select2-results__option{
         cursor: pointer;
     }
-
-    .select2-results__option:hover {
+    
+    .select2-results__option:hover{
         background-color: #e5e5e5;
     }
 
-    .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove {
+    .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove{
         color: #fff;
     }
 
-    .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove:hover {
+    .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove:hover{
         background: transparent;
     }
-
     /* select2 lib end */
     /* loader start */
-    .popup_that_shows_on_startup #make_a_trip_popup .loader_infinity {
+    .popup_that_shows_on_startup #make_a_trip_popup .loader_infinity{
         position: absolute;
         left: 42%;
         top: 39%;
@@ -319,25 +314,23 @@
         transition: all 0.2s;
     }
 
-    .popup_that_shows_on_startup #make_a_trip_popup .loader_infinity.hide {
-        display: none;
+    .popup_that_shows_on_startup #make_a_trip_popup .loader_infinity.hide{
+        display:none;
     }
-
     /* loader end */
     /* timetable start */
     @import url('https://fonts.googleapis.com/css?family=Ubuntu:500&display=swap');
 
-    .timetable_container {
+    .timetable_container{
         position: absolute;
         z-index: 9999999;
         left: 200px;
     }
-
-    .timetable_container.hide {
+    .timetable_container.hide{
         display: none;
     }
 
-    .timetable_container .calendar {
+	.timetable_container .calendar {
         box-shadow: 0 0 10px #878787;
         padding: 1em;
         border-radius: 10px;
@@ -348,79 +341,76 @@
         grid-auto-flow: row;
         color: black;
         background-color: hsl(231, 20%, 85%);
-    }
+	}
 
-    .timetable_container .cell {
+	.timetable_container .cell {
         padding: 0.4em 0.8em;
         text-align: center;
-
+        
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-    }
+	}
 
-    .timetable_container .cell:not(.cell--unselectable) {
+    .timetable_container .cell:not(.cell--unselectable){
         cursor: pointer;
     }
 
-    .timetable_container .cell:hover,
-    .cell:focus {
+	.timetable_container .cell:hover, .cell:focus {
         color: hsl(231, 20%, 85%);
         background-color: #2c085d;
         border-radius: 10px;
     }
 
-    .timetable_container .cell:empty {
+	.timetable_container .cell:empty {
         width: 0;
         padding: 0;
-    }
+	}
 
-    .timetable_container .cell--unselectable {
-        color: hsl(231, 20%, 50%);
-    }
+	.timetable_container .cell--unselectable {
+	    color: hsl(231, 20%, 50%);
+	}
 
-    .timetable_container .cell--unselectable:hover,
-    .cell--unselectable:focus {
+	.timetable_container .cell--unselectable:hover, .cell--unselectable:focus {
         color: hsl(231, 20%, 50%);
         background-color: transparent;
-    }
+	}
 
-    .timetable_container .date-text {
+	.timetable_container .date-text {
         padding: 1em 0.8em;
         grid-column: 1 / 5;
         justify-self: start;
         display: flex;
         align-items: center;
-
+        
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-    }
+	}
 
-    .timetable_container .button {
+	.timetable_container .button {
         cursor: pointer;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-    }
+	}
 
-    /* OTHER */
-
-    .timetable_container {
+	/* OTHER */
+	
+	.timetable_container {
         height: 200px;
         width: fit-content;
-
-
+        
+        
         font-family: 'Ubuntu', sans-serif;
-    }
-
+	}
     /* timetable end */
 
-    @media only screen and (max-width: 830px) {
-        .popup_that_shows_on_startup #make_a_trip_popup {
+    @media only screen and (max-width: 830px){
+        .popup_that_shows_on_startup #make_a_trip_popup{
             width: 90%;
             margin-top: 150px;
             margin-left: 5%;
@@ -428,6 +418,7 @@
     }
 
     /* make a trip popup end */
+
 </style>
 
 <div class="popup_that_shows_on_startup hide" dir="ltr">
@@ -455,7 +446,6 @@
                         <img src="{{ asset('front_assets/imgs/popup_images/trip_5.jpg') }}" alt="fabulous trip image">
                     </div>
                 </div>
-
                 <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}" class="tab hide col-12">
                     <div class="left-side">
                         <label for="date">{{ __('dashboard.select_date') }}</label>
@@ -579,7 +569,6 @@
                             alt="fabulous trip image">
                     </div>
                 </div>
-
                 @if (!auth()->check())
                     <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}" class="tab hide col-12 registerPage">
                         <div class="left-side">

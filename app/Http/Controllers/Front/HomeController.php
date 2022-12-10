@@ -17,6 +17,7 @@ use App\Models\Region;
 use App\Models\Setting;
 use App\Models\Store;
 use App\Models\Swalef;
+use App\Models\Trip;
 use App\Models\User;
 use App\Models\ZadElgadel;
 use Illuminate\Http\Request;
@@ -29,6 +30,26 @@ use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
+    public function save_trip(Request $request)
+    {
+        $data = $request->except('_token');
+        $data['user_id'] = auth()->user()->id;
+        if (!isset($request->name) && !$request->name) {
+            $data['name'] = request('date');
+        }
+
+        Trip::firstOrCreate($data);
+
+        return redirect()->route('front.my_trips');
+    }
+
+    public function my_trips()
+    {
+        $trips = Trip::where('user_id', auth()->user()->id)->get();
+        $places = [];
+        return view('front.trip.my_trips', compact('trips', 'places'));
+    }
+
     public function logout()
     {
         auth()->logout();
@@ -135,14 +156,18 @@ class HomeController extends Controller
         }
 
         $data = [];
+        $items = [];
         $i = 0;
         foreach ($places as $key => $value) {
             if (count($data[$i] ?? []) < request('funny_place_per_day')) {
                 $data[$i][] = $value;
+                // $items[$i][] = $value['id'];
             } else {
                 $i = $i + 1;
                 $data[$i][] = $value;
+                // $items[$i][] = $value['id'];
             }
+            $items[] = $value['id'];
         }
 
         if ($request->type == 'register' && $request->first_name && $request->last_name && $request->register_email && $request->register_password) {
@@ -170,8 +195,34 @@ class HomeController extends Controller
         }
 
         $places = $data;
+        $days = request('days');
+        $funny_place_per_day = request('funny_place_per_day');
+        $date = request('date');
+        return view('front.trip.selected_places', compact('places', 'days', 'funny_place_per_day', 'items', 'date'));
+    }
+
+    public function view_trip($id)
+    {
+        $trip = Trip::findOrFail($id);
+        $need_count = $trip->item_per_day * $trip->days;
+        $places = Place::whereIn('id', json_decode($trip->items, true)); //->take(10);
+        $places = $places->take($need_count)->get();
+
+        $data = [];
+        $i = 0;
+        foreach ($places as $key => $value) {
+            if (count($data[$i] ?? []) < $trip->item_per_day) {
+                $data[$i][] = $value;
+            } else {
+                $i = $i + 1;
+                $data[$i][] = $value;
+            }
+        }
+        $places = $data;
+
         return view('front.trip.selected_places', compact('places'));
     }
+
 
     public function index()
     {

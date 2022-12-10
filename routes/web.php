@@ -260,12 +260,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
         Route::get('sync_places_data', 'HomeController@sync_places_data');
         Route::get('selected_places', 'HomeController@selected_places');
+        
         Route::post('action_selected_places', 'HomeController@action_selected_places')->name('action_selected_places');
+        Route::get('view_trip/{id}', 'HomeController@view_trip')->name('view_trip')->middleware('auth');
 
 
         Route::post('/login', 'HomeController@login')->name('login');
         Route::post('/register', 'HomeController@register')->name('register');
         Route::get('/logout', 'HomeController@logout')->name('logout')->middleware('auth');
+        Route::post('/save_trip', 'HomeController@save_trip')->name('save_trip')->middleware('auth');
+        Route::get('/my_trips', 'HomeController@my_trips')->name('my_trips')->middleware('auth');
     });
     /*========================= Front Routes ==============================*/
 });

@@ -371,6 +371,7 @@
     @endif
 
     @include('front.trip.make_trip')
+    @include('front.trip.login_popup')
     <!-- make a trip popup -->
 
     <!-- highcharts -->
@@ -474,6 +475,20 @@
                 // alert('hi')
             })
         }
+
+        function makeALoginPopupShow() {
+            setTimeout(() => {
+                $('.popup_login').removeClass('hide')
+            }, 200);
+            $('.popup_login').click(function(e) {
+                var $target = $(e.target);
+                if (!$target.closest('#make_a_trip_popup').length) {
+                    $('.popup_login').addClass('hide')
+                }
+                // alert('hi')
+            })
+        }
+
 
         // *******************************
         // *******************************
