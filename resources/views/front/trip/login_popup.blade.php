@@ -2,7 +2,7 @@
     /* make a trip popup start */
 
     .popup_login {
-        position: absolute;
+        position: fixed;
         width: 100%;
         height: 100%;
         top: 0;
@@ -19,7 +19,7 @@
         z-index: 999999;
         display: flex;
         flex-direction: column;
-        width: 800px;
+        width: 500px;
         background-color: #fff;
         padding: 30px;
         border-radius: 10px;
@@ -141,7 +141,7 @@
         text-decoration: underline;
     }
 
-    .select2-container {
+    .popup_login .select2-container {
         z-index: 999999;
     }
 

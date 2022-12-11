@@ -92,7 +92,7 @@
         </li>
 
 
-        <div class="additional_bar_login_and_welcome">
+        <li class="additional_bar_login_and_welcome">
             @if (!auth()->check())
                 <div class=" ml-2 home_login_buttons_area">
                     <button class="home_login_button"
@@ -107,15 +107,15 @@
                     <span>{{ __('dashboard.welcome') }}</span>
                     <span>{{ auth()->user()->first_name }}</span>
                     <span>!</span>
-                    <li class="pl-4">
+                    <div class="pl-4">
                         <a href="{{ url(app()->getLocale() . '/logout') }}">
                             تسجيل الخروج
                         </a>
-                    </li>
+                    </div>
 
                 </div>
             @endif
-        </div>
+        </li>
 
         {{-- <div class="home_login_and_register_form_container hide"
             dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}">

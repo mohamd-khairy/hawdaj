@@ -1326,4 +1326,5 @@ return array(
     'select_trip_type' => 'Select Trip Type',
     'advanced_options' => 'Advanced Options',
     'funny_place_per_day' => 'Count Place Per Day',
+    'fill_required_fields' => 'Please Fill All Required Fields *'
 );

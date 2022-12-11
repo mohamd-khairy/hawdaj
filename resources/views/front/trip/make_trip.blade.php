@@ -4,7 +4,7 @@
     /* make a trip popup start */
 
     .popup_that_shows_on_startup{
-        position: absolute;
+        position: fixed;
         width: 100%;
         height: 100%;
         top: 0;
@@ -21,7 +21,9 @@
         z-index: 999999;
         display: flex;
         flex-direction: column;
-        width: 800px;
+        width: 75%;
+        min-height: 75%;
+        justify-content: space-evenly;
         background-color: #fff;
         padding: 30px;
         border-radius: 10px;
@@ -141,7 +143,7 @@
         text-decoration: underline;
     }
 
-    .select2-container{
+    .popup_that_shows_on_startup .select2-container{
         z-index: 999999;
     }
 
@@ -308,7 +310,7 @@
     /* loader start */
     .popup_that_shows_on_startup #make_a_trip_popup .loader_infinity{
         position: absolute;
-        left: 42%;
+        left: calc(50% - 75px);
         top: 39%;
         width: 150px;
         transition: all 0.2s;
@@ -440,7 +442,7 @@
                             aspernatur eveniet iure? Omnis dicta eligendi tempore.
                         </p>
                         <button type="button" class="make_a_trip_button"
-                            onclick="makeATripNextTab(1)">{{ __('dashboard.make_a_trip') }}</button>
+                            onclick="makeATripNextTab(1, 'start')">{{ __('dashboard.make_a_trip') }}</button>
                     </div>
                     <div class="right-side">
                         <img src="{{ asset('front_assets/imgs/popup_images/trip_5.jpg') }}" alt="fabulous trip image">
@@ -473,9 +475,8 @@
                         </select>
                         <div class="navigation_buttons">
                             <button type="button" class="make_a_trip_button"
-                                onclick="makeATripNextTab(0)">{{ __('dashboard.back') }}</button>
-                            <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(2)"
-                                disabled>{{ __('dashboard.next') }}</button>
+                                onclick="makeATripNextTab(0, 'back')">{{ __('dashboard.back') }}</button>
+                            <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(2, 'next')">{{ __('dashboard.next') }}</button>
                         </div>
                     </div>
                     <div class="right-side">
@@ -500,9 +501,8 @@
 
                         <div class="navigation_buttons">
                             <button type="button" class="make_a_trip_button"
-                                onclick="makeATripNextTab(1)">{{ __('dashboard.back') }}</button>
-                            <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(3)"
-                                disabled>{{ __('dashboard.next') }}</button>
+                                onclick="makeATripNextTab(1, 'back')">{{ __('dashboard.back') }}</button>
+                            <button type="button" class="make_a_trip_button next" onclick="makeATripNextTab(3, 'next')">{{ __('dashboard.next') }}</button>
                         </div>
                     </div>
                     <div class="right-side">
@@ -533,9 +533,9 @@
 
                         <div class="navigation_buttons">
                             <button type="button" class="make_a_trip_button"
-                                onclick="makeATripNextTab(2)">{{ __('dashboard.back') }}</button>
+                                onclick="makeATripNextTab(2, 'back')">{{ __('dashboard.back') }}</button>
                             <button type="button" class="make_a_trip_button next"
-                                onclick="makeATripNextTab(4)">{{ __('dashboard.next') }}</button>
+                                onclick="makeATripNextTab(4, 'next')">{{ __('dashboard.next') }}</button>
                         </div>
                     </div>
                     <div class="right-side">
@@ -550,18 +550,18 @@
                             <input type="email" name="email" placeholder="Email" required>
                             <label>{{ __('dashboard.password') }}</label>
                             <input type="password" name="password" placeholder="Password" required>
-                            <button type="button" id="login" disabled>{{ __('dashboard.login') }}</button>
+                            <button type="button" id="login">{{ __('dashboard.login') }}</button>
                             <button type="submit" id="as_a_guest"
                                 class="">{{ __('dashboard.continueAsAguest') }}</button>
 
-                            <a href="#" onclick="makeATripNextTab(5)">{{ __('dashboard.register') }}</a>
+                            <a href="#" onclick="makeATripNextTab(5, 'register')">{{ __('dashboard.register') }}</a>
                         @else
                             <button type="submit" class="">{{ __('dashboard.continue') }}</button>
                         @endif
 
                         <div class="navigation_buttons">
                             <button type="button" class="make_a_trip_button"
-                                onclick="makeATripNextTab(3)">{{ __('dashboard.back') }}</button>
+                                onclick="makeATripNextTab(3, 'back')">{{ __('dashboard.back') }}</button>
                         </div>
                     </div>
                     <div class="right-side">
@@ -580,11 +580,11 @@
                             <input type="email" name="register_email" placeholder="" required>
                             <label>{{ __('dashboard.password') }}</label>
                             <input type="password" name="register_password" placeholder="" required>
-                            <button type="button" id="register" disabled>{{ __('dashboard.register') }}</button>
+                            <button type="button" id="register">{{ __('dashboard.register') }}</button>
 
                             <div class="navigation_buttons">
                                 <button type="button" class="make_a_trip_button"
-                                    onclick="makeATripNextTab(4)">{{ __('dashboard.back') }}</button>
+                                    onclick="makeATripNextTab(4, 'back')">{{ __('dashboard.back') }}</button>
                             </div>
 
                         </div>

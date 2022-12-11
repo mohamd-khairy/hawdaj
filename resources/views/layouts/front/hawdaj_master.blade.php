@@ -440,23 +440,36 @@
         // *******************************
         // *******************************
         /* popup back and next buttons */
-        function makeATripNextTab(tabNum) {
+        var popup_input_values = true
+        function makeATripNextTab(tabNum, button_direction) {
             var val = -(tabNum * 100);
-            $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transition", "all 0.3s")
-            $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("opacity", "0")
-            $('.popup_that_shows_on_startup #make_a_trip_popup .loader_infinity').removeClass('hide')
-            setTimeout(() => {
-                $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transform", `translateX(${val}%)`)
-            }, 300);
-            setTimeout(() => {
-                $('.popup_that_shows_on_startup #make_a_trip_popup .loader_infinity').addClass('hide')
-                $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("opacity", "1")
-            }, 600);
-            // the following part is to control length of pages in popup
-            if (tabNum == 4) {
-                $('.popup_that_shows_on_startup #make_a_trip_popup .tab.registerPage').addClass('hide')
-            } else if (tabNum == 5) {
-                $('.popup_that_shows_on_startup #make_a_trip_popup .tab.registerPage').removeClass('hide')
+            popup_input_values = true
+            if(button_direction == 'next'){
+                $(`.popup_that_shows_on_startup #make_a_trip_popup .tabs > .tab:nth-of-type(${tabNum}) .left-side`).children('input[required], select[required]').each(function(){
+                    if($(this).val()){}else{popup_input_values = false}
+                    // alert('gere')
+                })
+                if(popup_input_values == false){
+                    alert("{{__('dashboard.fill_required_fields')}}")
+                }
+            }
+            if(popup_input_values == true){
+                $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transition", "all 0.3s")
+                $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("opacity", "0")
+                $('.popup_that_shows_on_startup #make_a_trip_popup .loader_infinity').removeClass('hide')
+                setTimeout(() => {
+                    $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transform", `translateX(${val}%)`)
+                }, 300);
+                setTimeout(() => {
+                    $('.popup_that_shows_on_startup #make_a_trip_popup .loader_infinity').addClass('hide')
+                    $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("opacity", "1")
+                }, 600);
+                // the following part is to control length of pages in popup
+                if (tabNum == 4) {
+                    $('.popup_that_shows_on_startup #make_a_trip_popup .tab.registerPage').addClass('hide')
+                } else if (tabNum == 5) {
+                    $('.popup_that_shows_on_startup #make_a_trip_popup .tab.registerPage').removeClass('hide')
+                }
             }
         }
 
@@ -469,8 +482,13 @@
             }, 200);
             $('.popup_that_shows_on_startup').click(function(e) {
                 var $target = $(e.target);
+                // alert(e.target.className)
                 if (!$target.closest('#make_a_trip_popup').length) {
-                    $('.popup_that_shows_on_startup').addClass('hide')
+                    if(!$target.hasClass("popup_that_shows_on_startup")){}else{
+                        // $('#make_a_trip_popup .select2 .select2-selection--multiple').click(function(){
+                        // })
+                        $('.popup_that_shows_on_startup').addClass('hide')
+                    }
                 }
                 // alert('hi')
             })
@@ -482,7 +500,7 @@
             }, 200);
             $('.popup_login').click(function(e) {
                 var $target = $(e.target);
-                if (!$target.closest('#make_a_trip_popup').length) {
+                if (!$target.closest('#make_a_trip_popup').children().length) {
                     $('.popup_login').addClass('hide')
                 }
                 // alert('hi')
@@ -493,36 +511,37 @@
         // *******************************
         // *******************************
         /* only allow next when all required inputs are full */
-        var popup_input_values = false
-        $(".popup_that_shows_on_startup #make_a_trip_popup input[required], .popup_that_shows_on_startup #make_a_trip_popup select[required]")
-            .on("input", function() {
-                // alert('changed')
-                if ($(this).val()) {
-                    $(this).siblings('input[required], select[required]').each(function(index) {
-                        if ($(this).val()) {
-                            // alert($(this).val())
-                            popup_input_values = true;
-                        } else {
-                            popup_input_values = false;
-                            $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled',
-                                true);
-                            $(this).siblings('#login, #register').prop('disabled', true);
-                            // alert(popup_input_values); 
-                            return;
-                        }
-                    })
-                } else {
-                    $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', true);
-                    $(this).siblings('#login, #register').prop('disabled', true);
-                    popup_input_values = false;
-                    // alert(popup_input_values); 
-                }
-                if (popup_input_values) {
-                    $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', false);
-                    $(this).siblings('#login, #register').prop('disabled', false);
-                }
-                // console.log(popup_input_values)
-            });
+        
+        // $(".popup_that_shows_on_startup #make_a_trip_popup input[required], .popup_that_shows_on_startup #make_a_trip_popup select[required]")
+        //     .on("input", function() {
+        //         // alert('changed')
+        //         if ($(this).val()) {
+        //             $(this).siblings('input[required], select[required]').each(function(index) {
+        //                 if ($(this).val()) {
+        //                     alert($(this).val())
+        //                     popup_input_values = true;
+        //                 } else {
+        //                     popup_input_values = false;
+        //                     // $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled',
+        //                     //     true);
+        //                     // $(this).siblings('#login, #register').prop('disabled', true);
+        //                     // alert(popup_input_values); 
+        //                     return;
+        //                 }
+        //             })
+        //         } else {
+        //             // $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', true);
+        //             // $(this).siblings('#login, #register').prop('disabled', true);
+        //             popup_input_values = false;
+        //             alert(popup_input_values); 
+        //         }
+        //         if (popup_input_values) {
+        //             popup_input_values = true;
+        //             // $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', false);
+        //             // $(this).siblings('#login, #register').prop('disabled', false);
+        //         }
+        //         // console.log(popup_input_values)
+        //     });
 
         $('.popup_that_shows_on_startup #make_a_trip_popup button#as_a_guest').click(function() {
             // alert('clicked')

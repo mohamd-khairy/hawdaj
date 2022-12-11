@@ -8,21 +8,25 @@ $(document).ready(function(){
 /* popup back and next buttons */
 function makeATripNextTab(tabNum){
     var val = -(tabNum * 100);
-    $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transition", "all 0.3s")
-    $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("opacity","0")
-    $('.popup_that_shows_on_startup #make_a_trip_popup .loader_infinity').removeClass('hide')
-    setTimeout(() => {
-        $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transform", `translateX(${val}%)`)
-    }, 300);
-    setTimeout(() => {
-        $('.popup_that_shows_on_startup #make_a_trip_popup .loader_infinity').addClass('hide')
-        $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("opacity","1")
-    }, 600);
-    // the following part is to control length of pages in popup
-    if(tabNum == 4){
-        $('popup_that_shows_on_startup #make_a_trip_popup .tab.registerPage').addClass('hide')
-    }else if(tabNum == 5){
-        $('popup_that_shows_on_startup #make_a_trip_popup .tab.registerPage').removeClass('hide')
+    if(button_direction == 'next' && popup_input_values == false){
+        alert("{{__('dashboard.fill_required_fields')}}")
+    }else{
+        $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transition", "all 0.3s")
+        $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("opacity","0")
+        $('.popup_that_shows_on_startup #make_a_trip_popup .loader_infinity').removeClass('hide')
+        setTimeout(() => {
+            $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("transform", `translateX(${val}%)`)
+        }, 300);
+        setTimeout(() => {
+            $('.popup_that_shows_on_startup #make_a_trip_popup .loader_infinity').addClass('hide')
+            $('.popup_that_shows_on_startup #make_a_trip_popup .tabs').css("opacity","1")
+        }, 600);
+        // the following part is to control length of pages in popup
+        if(tabNum == 4){
+            $('popup_that_shows_on_startup #make_a_trip_popup .tab.registerPage').addClass('hide')
+        }else if(tabNum == 5){
+            $('popup_that_shows_on_startup #make_a_trip_popup .tab.registerPage').removeClass('hide')
+        }
     }
 }
 // *******************************
@@ -55,22 +59,23 @@ $(".popup_that_shows_on_startup #make_a_trip_popup input[required], .popup_that_
             }
             else{
                 popup_input_values = false;
-                $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', true);
-                $(this).siblings('#login, #register').prop('disabled', true);
+                // $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', true);
+                // $(this).siblings('#login, #register').prop('disabled', true);
                 // alert(popup_input_values); 
                 return;
             }
         })
     }
     else{
-        $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', true);
-        $(this).siblings('#login, #register').prop('disabled', true);
+        // $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', true);
+        // $(this).siblings('#login, #register').prop('disabled', true);
         popup_input_values = false;
         // alert(popup_input_values); 
     }
     if(popup_input_values){
-        $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', false);
-        $(this).siblings('#login, #register').prop('disabled', false);
+        popup_input_values = true;
+        // $(this).siblings('div.navigation_buttons').children('button.next').prop('disabled', false);
+        // $(this).siblings('#login, #register').prop('disabled', false);
     }
     // console.log(popup_input_values)
 });
