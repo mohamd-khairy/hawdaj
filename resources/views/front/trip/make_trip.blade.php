@@ -32,6 +32,14 @@
         visibility: visible;
         opacity: 1;
         overflow: hidden;
+        position: relative;
+    }
+    
+    .popup_that_shows_on_startup #make_a_trip_popup .closing_x{
+        position: absolute;
+        width: 20px;
+        top: 20px;
+        cursor: pointer;
     }
 
     .popup_that_shows_on_startup.hide{
@@ -425,6 +433,7 @@
 
 <div class="popup_that_shows_on_startup hide" dir="ltr">
     <div id="make_a_trip_popup" class="container" style="z-index: 999999;">
+        <img class="closing_x" src="{{ asset('front_assets/imgs/popup_images/xmark-solid.svg') }}" alt="">
         <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}">
             <h5>{{ __('dashboard.ready_to_make_a_trip') }}</h5>
         </div>

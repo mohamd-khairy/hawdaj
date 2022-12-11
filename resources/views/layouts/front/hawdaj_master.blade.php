@@ -482,6 +482,9 @@
             }, 200);
             $('.popup_that_shows_on_startup').click(function(e) {
                 var $target = $(e.target);
+                if($target.hasClass("closing_x")){
+                        $('.popup_that_shows_on_startup').addClass('hide')
+                    }
                 // alert(e.target.className)
                 if (!$target.closest('#make_a_trip_popup').length) {
                     if(!$target.hasClass("popup_that_shows_on_startup")){}else{
