@@ -53,7 +53,7 @@
     .popup_that_shows_on_startup #make_a_trip_popup h5{
         margin-bottom: 20px;
         font-weight: bold;
-        width: 60%;
+        /* width: 60%; */
     }
 
     .popup_that_shows_on_startup #make_a_trip_popup .tabs{
@@ -99,7 +99,7 @@
     .popup_that_shows_on_startup .tabs .right-side img{
         width: 85%;
         object-fit: cover;
-        height: 350px;
+        height: 450px;
         min-height: 90%;
         border-radius: 50px;
     }
@@ -129,7 +129,7 @@
         display: none !important;
     }
 
-    .popup_that_shows_on_startup .tab > .left-side > *:not(h6):not(.trip_categories):not(a):not(.navigation_buttons):not(label):not(.timetable_container), #make_a_trip_popup .tab .trip_categories > span{
+    .popup_that_shows_on_startup .tab > .left-side > *:not(.please_fill_this_field):not(h6):not(.trip_categories):not(a):not(.navigation_buttons):not(label):not(.timetable_container), #make_a_trip_popup .tab .trip_categories > span{
         width: 70% !important;
         margin: 0 auto 20px;
         height: 40px !important;
@@ -138,6 +138,23 @@
         border: 1px solid #2c085d !important;
         cursor: pointer;
         background-color: hsl(231, 20%, 85%);
+    }
+
+    .popup_that_shows_on_startup.rtl .please_fill_this_field{
+        right: unset;
+        left: 50%;
+    }
+
+    .popup_that_shows_on_startup .please_fill_this_field{
+        border: none;
+        position: absolute;
+        width: fit-content;
+        color: #fff;
+        background-color: #f00;
+        right: 50%;
+        font-weight: normal;
+        padding: 5px 10px;
+        border-radius: 10px;
     }
     
     .popup_that_shows_on_startup .tab > .left-side > #as_a_guest{
@@ -331,6 +348,11 @@
     /* timetable start */
     @import url('https://fonts.googleapis.com/css?family=Ubuntu:500&display=swap');
 
+    .rtl.timetable_container{
+        position: absolute;
+        z-index: 9999999;
+        right: 200px;
+    }
     .timetable_container{
         position: absolute;
         z-index: 9999999;
@@ -431,12 +453,11 @@
 
 </style>
 
-<div class="popup_that_shows_on_startup hide" dir="ltr">
+<div class="popup_that_shows_on_startup hide {{app()->getLocale() == 'en' ? 'ltr' : 'rtl'}}" dir="ltr">
     <div id="make_a_trip_popup" class="container" style="z-index: 999999;">
         <img class="closing_x" src="{{ asset('front_assets/imgs/popup_images/xmark-solid.svg') }}" alt="">
-        <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}">
-            <h5>{{ __('dashboard.ready_to_make_a_trip') }}</h5>
-        </div>
+        <!-- <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}">
+        </div> -->
         <form action="{{ route('front.action_selected_places') }}" method="POST" id="trip_form">
             <input type="hidden" name="type" id="type" value="guest">
             @csrf
@@ -445,6 +466,7 @@
             <div class="tabs row">
                 <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}" class="main_tab col-12">
                     <div class="left-side">
+                        <h5>{{ __('dashboard.ready_to_make_a_trip') }}</h5>
                         <p class="description">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo qui incidunt, quam id
                             architecto, repellat vel fuga placeat distinctio quia magni praesentium reiciendis
@@ -459,12 +481,13 @@
                 </div>
                 <div dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}" class="tab hide col-12">
                     <div class="left-side">
-                        <label for="date">{{ __('dashboard.select_date') }}</label>
-                        <div class="timetable_container hide">
+                        <div class="timetable_container {{app()->getLocale() == 'en' ? 'ltr' : 'rtl'}} hide">
                             <div id="calendar" class="calendar">
                                 <span>Add something here</span>
                             </div>
                         </div>
+                        <label for="date">{{ __('dashboard.select_date') }}</label>
+                        
                         <input type="date" name="date" placeholder="" id="date" onclick="openCalendar()"
                             required>
 

@@ -306,7 +306,7 @@
                     </tbody>
 
                 </table>
-                {!! str_replace('/?', '?', $places->render()) !!}
+                {!! str_replace('/?', '?', $places->withQueryString()->render()) !!}
             </div>
             @else
             <div class="card-body">

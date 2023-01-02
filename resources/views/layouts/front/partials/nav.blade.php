@@ -20,7 +20,7 @@
                 <a class="nav-link" href="{{ url(app()->getLocale() . '/zads') }}">زاد الجادل</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/caravan.html">الكرفانات</a>
+                <a class="nav-link" href="#">الكرفانات</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">سوالف</a>
@@ -34,6 +34,46 @@
         </ul>
 
         <ul class="socials-sm d-flex align-items-center d-lg-none">
+            @if (auth()->check() &&
+                in_array(1,
+                    auth()->user()->roles->pluck('pivot.role_id')->toArray()))
+                <li class="pl-2">
+                    <a href="{{ url(app()->getLocale() . '/dashboard') }}" target="_blank" class=" btn btn-primary">
+                        لوحة التحكم
+                    </a>
+                </li>
+            @endif
+            <li class="pl-2">
+                <!-- <a href="{{ url(app()->getLocale() . '/dashboard') }}" target="_blank" class=" btn btn-primary" onclick="makeATripPopupShow()"> -->
+                <button target="_blank" class=" btn btn-primary" onclick="makeATripPopupShow()">
+                    ابدأ رحلتك
+                    </a>
+            </li>
+            <li class="additional_bar_login_and_welcome">
+                @if (!auth()->check())
+                    <div class=" ml-2 home_login_buttons_area">
+                        <button class="home_login_button"
+                            onclick="makeALoginPopupShow()">{{ __('dashboard.login') }}</button>
+                    </div>
+                @else
+                    <div class=" ml-2 pl-2 home_login_buttons_area">
+                        <a class="home_login_button btn btn-primary" href="{{ route('front.my_trips') }}">رحلاتي</a>
+                    </div>
+
+                    <div class="home_welcome_text_area ml-2" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}">
+                        <span>{{ __('dashboard.welcome') }}</span>
+                        <span>{{ auth()->user()->first_name }}</span>
+                        <span>!</span>
+                        <div class="pl-4">
+                            <a href="{{ url(app()->getLocale() . '/logout') }}">
+                                تسجيل الخروج
+                            </a>
+                        </div>
+
+                    </div>
+                @endif
+            </li>
+
             <li>
                 <a href="#" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" viewBox="0 0 22.999 23">
@@ -83,15 +123,12 @@
                 </a>
             </li>
         @endif
-
         <li class="pl-2">
             <!-- <a href="{{ url(app()->getLocale() . '/dashboard') }}" target="_blank" class=" btn btn-primary" onclick="makeATripPopupShow()"> -->
             <button target="_blank" class=" btn btn-primary" onclick="makeATripPopupShow()">
                 ابدأ رحلتك
                 </a>
         </li>
-
-
         <li class="additional_bar_login_and_welcome">
             @if (!auth()->check())
                 <div class=" ml-2 home_login_buttons_area">
@@ -103,7 +140,7 @@
                     <a class="home_login_button btn btn-primary" href="{{ route('front.my_trips') }}">رحلاتي</a>
                 </div>
 
-                <div class="home_welcome_text_area" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}">
+                <div class="home_welcome_text_area ml-2" dir="{{ app()->getLocale() == 'en' ? 'ltr' : 'rtl' }}">
                     <span>{{ __('dashboard.welcome') }}</span>
                     <span>{{ auth()->user()->first_name }}</span>
                     <span>!</span>

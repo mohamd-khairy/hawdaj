@@ -1052,6 +1052,7 @@ return [
     'select_trip_type' => 'اختر نوع الرحلة',
     'advanced_options' => 'خيارات متقدمة',
     'funny_place_per_day' => 'عدد اماكن الزياره في اليوم',
-    'fill_required_fields' => 'رجاء املأ جميع الحقول المطلوبة *'
+    'fill_required_fields' => 'رجاء املأ جميع الحقول المطلوبة *',
+    'please_fill_this_field' => 'رجاء املأ هذا الحقل',
 
 ];

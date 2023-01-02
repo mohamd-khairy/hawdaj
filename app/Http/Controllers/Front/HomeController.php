@@ -151,7 +151,11 @@ class HomeController extends Controller
             $places = $places->take($need_count);
         } else {
             $need = $need_count - $places->count();
-            $new_places = Place::inRandomOrder()->where('seasons', 'like', '%' . $season . '%')->take($need)->get();
+            $new_places = Place::inRandomOrder()->where(function ($q) use ($season, $request) {
+                $q->where('seasons', 'like', '%' . $season . '%')
+                    ->orWhere('region_id', $request->region_id);
+            })->take($need)->get();
+
             $places = array_merge($places->toArray(), $new_places->toArray());
         }
 
@@ -219,8 +223,9 @@ class HomeController extends Controller
             }
         }
         $places = $data;
+        $date = $trip->date;
 
-        return view('front.trip.selected_places', compact('places'));
+        return view('front.trip.selected_places', compact('places', 'trip', 'date'));
     }
 
 
@@ -1439,5 +1444,11 @@ class HomeController extends Controller
             return $folder . '/' . end($image);
         }
         return null;
+    }
+
+    public function get_all_swalefs()
+    {
+        $places =[];
+        return view('front.swalef.all' , compact('places'));
     }
 }

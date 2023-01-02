@@ -258,7 +258,7 @@
                         @endif
                     </tbody>
                 </table>
-                {!! str_replace('/?', '?', $stores->render()) !!}
+                {!! str_replace('/?', '?', $stores->withQueryString()->render()) !!}
 
             </div>
             @else

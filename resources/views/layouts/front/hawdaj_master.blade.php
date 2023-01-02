@@ -442,15 +442,39 @@
         /* popup back and next buttons */
         var popup_input_values = true
         function makeATripNextTab(tabNum, button_direction) {
-            var val = -(tabNum * 100);
+            var val = -(tabNum * 100),
+                childArray = [],
+                newChildArray = [],
+                childCounter = 1;
             popup_input_values = true
             if(button_direction == 'next'){
                 $(`.popup_that_shows_on_startup #make_a_trip_popup .tabs > .tab:nth-of-type(${tabNum}) .left-side`).children('input[required], select[required]').each(function(){
-                    if($(this).val()){}else{popup_input_values = false}
+                    if($(this).val()){}else{
+                        popup_input_values = false;
+                        // childArray.push(childCounter)
+                        childArray.push(this)
+                    }
                     // alert('gere')
+                    // childCounter = childCounter + 1;
                 })
                 if(popup_input_values == false){
-                    alert("{{__('dashboard.fill_required_fields')}}")
+                    // alert("{{__('dashboard.fill_required_fields')}}")
+                    // alert(childArray)
+
+                    for(i = 0 ; i < childArray.length ; i++){
+                        if (!$(childArray[i]).prev('label').children('.please_fill_this_field').length){
+                            $(childArray[i]).prev('label').append(" <b class='please_fill_this_field'> {{__('dashboard.please_fill_this_field')}} </b> ")
+                        }
+                    }
+
+                    // childCounter = 1
+                    // $(`.popup_that_shows_on_startup #make_a_trip_popup .tabs > .tab:nth-of-type(${tabNum}) .left-side`).children('input[required], select[required]').each(function(){
+                    //     if(jQuery.inArray(childCounter, childArray)){
+                    //         alert(childCounter)
+                    //     }
+                    //     childCounter = childCounter + 1
+                    // })
+                    // $( "p" ).before( "<b>Hello</b>" );
                 }
             }
             if(popup_input_values == true){

@@ -178,7 +178,7 @@ class PlacesController extends Controller
 
     public function edit(Place $place)
     {
-        $reg = $place->region->cities;
+        $reg = isset($place->region->cities) ? $place->region->cities : [];
 
         $inside_map = isset($place['distance']) && $place['distance'] > 0 ? Place::select('id', 'lat', 'long')->where('id', '!=', $place->id)->where('active', 1)->get()->map(function ($i) use ($place) {
             if (round(distance($place['lat'], $place['long'], $i['lat'], $i['long'], "M"), 1) <= $place['distance'] ?? 0) {
