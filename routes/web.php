@@ -272,6 +272,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         Route::get('/my_trips', 'HomeController@my_trips')->name('my_trips')->middleware('auth');
 
         Route::get('/swalefs', 'HomeController@get_all_swalefs')->name('swalefs');
+        Route::get('/swalef/{id}', 'HomeController@one_page_swalefs')->name('swalefsonepage');
     });
     /*========================= Front Routes ==============================*/
 });

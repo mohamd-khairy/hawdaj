@@ -174,7 +174,7 @@
                                     <span class="switch switch-outline switch-icon switch-success">
                                         <label style="margin:15px">@lang('dashboard.status') : </label>
                                         <label>
-                                            <input type="checkbox" checked="checked" name="active" value="{{old('active' , $swalef->active)}}" />
+                                            <input type="checkbox" name="active" {{old('active' , $swalef->active) ? 'checked' : ''}}  />
                                             <span></span>
                                         </label>
                                     </span>

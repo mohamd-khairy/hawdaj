@@ -29,7 +29,8 @@ ul {
 body {
     direction: rtl;
     text-align: right;
-    color: #393939
+    color: #393939;
+    overflow-x: hidden;
 }
 
 @media (min-width: 576px) {

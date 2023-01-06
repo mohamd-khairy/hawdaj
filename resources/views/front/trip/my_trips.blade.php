@@ -27,7 +27,7 @@
 
                                         <!-- card content -->
                                         <div class="card-body pb-4">
-                                            <h5 class="my_trips_card_title">{{ $place['name'] }} </h5>
+                                            {{-- <h5 class="my_trips_card_title">{{ $place['name'] }} </h5> --}}
                                             <div class="d-flex align-items-center justify-content-center">
                                                 <div class="rate d-flex align-items-center">
                                                     <span class="mx-1 my_trips_card_date">{{ $place['date'] }}</span>

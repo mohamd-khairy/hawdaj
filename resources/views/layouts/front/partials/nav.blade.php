@@ -19,18 +19,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url(app()->getLocale() . '/zads') }}">زاد الجادل</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="#">الكرفانات</a>
-            </li>
+            </li> --}}
             <li class="nav-item">
-                <a class="nav-link" href="#">سوالف</a>
+                <a class="nav-link" href="{{ url(app()->getLocale() . '/swalefs') }}">سوالف</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="#">المزادات</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">خدمات السائح</a>
-            </li>
+            </li> --}}
         </ul>
 
         <ul class="socials-sm d-flex align-items-center d-lg-none">

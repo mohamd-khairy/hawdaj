@@ -1448,7 +1448,16 @@ class HomeController extends Controller
 
     public function get_all_swalefs()
     {
-        $places =[];
-        return view('front.swalef.all' , compact('places'));
+        $places = [];
+        $swalefs = Swalef::orderBy('id', 'desc')->where('active', 1)->paginate(12);
+        return view('front.swalef.all', compact('places', 'swalefs'));
+    }
+
+    public function one_page_swalefs($id)
+    {
+        $places = [];
+        $swalef = Swalef::where('active', 1)->find($id);
+        $swalefs = Swalef::inRandomOrder()->where('id' , '!=' , $id)->where('active', 1)->take(4)->get();
+        return view('front.swalef.one', compact('places', 'swalef', 'swalefs'));
     }
 }

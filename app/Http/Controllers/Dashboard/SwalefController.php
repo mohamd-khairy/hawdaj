@@ -31,7 +31,7 @@ class SwalefController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
+    {
         return view('dashboard.swalef.create', [
             'types' => Swalef::TYPES,
             'title' => __('dashboard.create_swalef')
@@ -56,6 +56,11 @@ class SwalefController extends Controller
             }
             if ($request->hasFile('content')) {
                 $data['content'] = UploadService::store($request->content, 'swalefs');
+            }
+            if ($request->active == 'on') {
+                $data['active'] = 1;
+            }else{
+                $data['active'] = 0;
             }
             Swalef::create($data);
 
@@ -107,7 +112,6 @@ class SwalefController extends Controller
         try {
             $data = $request->except('_token');
 
-
             \DB::beginTransaction();
 
             if ($request->hasFile('image')) {
@@ -117,6 +121,11 @@ class SwalefController extends Controller
             if ($request->hasFile('content')) {
                 UploadService::delete($swalef->content);
                 $data['content'] = UploadService::store($request->content, 'swalefs');
+            }
+            if (isset($request->active) && $request->active == 'on') {
+                $data['active'] = 1;
+            } else {
+                $data['active'] = 0;
             }
 
             $swalef->update($data);
