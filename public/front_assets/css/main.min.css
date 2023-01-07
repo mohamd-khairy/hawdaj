@@ -949,7 +949,7 @@ select.form-control {
         width: 100%;
         max-width: 400px;
         height: 100vh;
-        padding: 90px 25px 25px;
+        padding: 55px 25px 25px;
         background: #fff;
         transition: visible .2s ease-in-out, opacity .2s ease-in-out, right .2s ease-in-out;
         box-shadow: 3px 5px 36px rgba(0, 0, 0, .03)
@@ -4181,7 +4181,7 @@ select.form-control {
     padding: 1px 30px;
     border-radius: 50px;
     background-color: #d1d3e0;
-    
+
 }
 .my_trips_section.inner_trips_section  .my_trips_place_card{
     width: 300px;
